@@ -33,7 +33,7 @@ void Enemy::OnCollision(Actor* other) {
         other->SetDestroyed();
         m_health -= 1.0f;
         if (m_health <= 0.0f) {
-            nu::Engine::Get().GetAudio().PlaySound("Explosion");
+            //nu::Engine::Get().GetAudio().PlaySound("Explosion");
             SetDestroyed();
             for (int i = 0; i < 100; i++)
             {

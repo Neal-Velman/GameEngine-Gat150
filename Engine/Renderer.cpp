@@ -4,6 +4,7 @@
 #include "Model.h"
 #include "Input.h"
 #include "MathUtils.h"
+#include "Texture.h"
 #include <iostream>
 
 namespace nu {
@@ -91,5 +92,31 @@ namespace nu {
                 DrawLine(v1.x, v1.y, v2.x, v2.y);
             }
         }
+    }
+
+    void Renderer::DrawTexture(const Texture& texture, float x, float y)
+    {
+        Vector2 size = texture.GetSize();
+
+        SDL_FRect destRect;
+        destRect.x = x;
+        destRect.y = y;
+        destRect.w = size.x;
+        destRect.h = size.y;
+
+        // https://wiki.libsdl.org/SDL3/SDL_RenderTexture
+        SDL_RenderTexture(m_renderer, texture.m_texture, NULL, &destRect);
+    }
+    void Renderer::DrawTexture(const Texture& texture, float x, float y, float angle, float scale, bool flipH) {
+        Vector2 size = texture.GetSize();
+
+        SDL_FRect destRect;
+        destRect.x = x;
+        destRect.y = y;
+        destRect.w = size.x * scale;
+        destRect.h = size.y * scale;
+
+        // https://wiki.libsdl.org/SDL3/SDL_RenderTexture
+        SDL_RenderTextureRotated(m_renderer, texture.m_texture, NULL, &destRect, angle, NULL, (flipH) ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
     }
 }

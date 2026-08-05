@@ -1,6 +1,7 @@
 #pragma once
 #include <SDL3/SDL.h>
 #include <SDL3_ttf/SDL_ttf.h>
+#include <SDL3_image/SDL_image.h>
 
 namespace nu {
 	class Renderer {
@@ -20,11 +21,14 @@ namespace nu {
 		void DrawLine(float x1, float y1, float x2, float y2) const;
 
 		void DrawModel(const class Model& model, const struct Transform& transform) const;
+		void DrawTexture(const class Texture& texture, float x, float y);
+		void DrawTexture(const class Texture& texture, float x, float y, float angle, float scale = 1.0f, bool flipH = false);
 
 		int GetWidth() const { return m_width; }
 		int GetHeight() const { return m_height; }
 
 		friend class Text;
+		friend class Texture;
 
 		SDL_Renderer* GetRenderer() { return m_renderer; }
 

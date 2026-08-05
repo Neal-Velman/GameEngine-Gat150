@@ -4,6 +4,8 @@
 #include "MathUtils.h"
 #include "Transform.h"
 #include "Text.h"
+#include "Texture.h"
+#include "ResourceManager.h"
 
 // Systems
 #include "Renderer.h"

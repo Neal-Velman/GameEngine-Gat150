@@ -48,7 +48,7 @@ int main() {
 		//delete objectC;
     }
 
-    std::cout << "---------- Smart Pointers ----------" << std::endl;
+    std::cout << "---------- Unique Pointers ----------" << std::endl;
     {
         std::unique_ptr<Object> objectA = std::make_unique<Object>();
         std::cout << objectA.get() << std::endl;
@@ -60,12 +60,31 @@ int main() {
 
     }
 
+    std::cout << "---------- Shared Pointers ----------" << std::endl;
+    std::shared_ptr<Object> objectC;
+    {
+        std::shared_ptr<Object> objectA = std::make_shared<Object>();
+        std::cout << objectA.get() << std::endl;
+        std::cout << objectA.use_count() << std::endl;
+        auto objectB = objectA;
+        std::cout << objectB.get() << std::endl;
+        std::cout << objectB.use_count() << std::endl;
+        auto objectC = objectA;
+        std::cout << objectC.get() << std::endl;
+        std::cout << objectC.use_count() << std::endl;
+    }
+    std::cout << objectC.use_count() << std::endl;
+
     //return 0;
 
     // INITIALIZATION
     nu::SetWorkingDirectory("Assets");
 
     nu::Engine::Get().Initialize();
+
+    // create texture, using shared_ptr so texture can be shared
+    //std::shared_ptr<nu::Texture> texture = std::make_shared<nu::Texture>();
+    //texture->Load("Textures/catSmirk.jpg", nu::Engine::Get().GetRenderer());
 
     SpaceGame game;
     game.Initialize();
@@ -144,10 +163,6 @@ int main() {
         
 
         // RENDER
-        nu::Engine::Get().GetRenderer().SetColor(0.0f, 0.0f, 0.0f);
-        nu::Engine::Get().GetRenderer().Clear();
-
-
         for (int i = 0; i < (int)points.size() - 1; i++) {
             nu::Engine::Get().GetRenderer().SetColor(nu::RandomFloat(), nu::RandomFloat(), nu::RandomFloat());
             nu::Engine::Get().GetRenderer().DrawLine(points[i].x, points[i].y, points[i + 1].x, points[i+1].y);
@@ -155,7 +170,12 @@ int main() {
         }
 
         // Character
+        nu::Engine::Get().GetRenderer().SetColor(0.0f, 0.0f, 0.0f);
+        nu::Engine::Get().GetRenderer().Clear();
+
+        nu::Engine::Get().GetRenderer().DrawTexture(*nu::Resources().Get<nu::Texture>("Textures/catSmirk.jpg", nu::Engine::Get().GetRenderer()), 30, 30, 60.0f);
         game.Draw(nu::Engine::Get().GetRenderer());
+
         nu::Engine::Get().GetPS().Draw(nu::Engine::Get().GetRenderer());
         nu::Engine::Get().GetRenderer().Present();
     }

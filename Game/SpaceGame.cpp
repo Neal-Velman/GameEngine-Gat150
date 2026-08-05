@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "Assets.h"
+#include <memory>
 
 bool SpaceGame::Initialize() {
     Game::Initialize();
@@ -14,17 +15,20 @@ bool SpaceGame::Initialize() {
     //m_audio = new nu::Audio();
     m_scene->SetGame(this);
 
-    m_titleFont = new nu::Font();
-    m_titleFont->Load("Fonts/BitcountGridDouble-Black.ttf", 64);
+	/*Resources().Get<Font>("Fonts/BitcountGridDouble-Black.ttf", 64);
+	Resources().Get<Texture>("Textures/player.png", nu::Engine::Get().GetRenderer());*/
 
-    m_titleText = new nu::Text(m_titleFont);
+	/*m_titleFont = nu::Resources().Get<nu::Font>("Fonts/BitcountGridDouble-Black.ttf", 64);
+    m_titleFont->Load("Fonts/BitcountGridDouble-Black.ttf", 64);*/
+
+    m_titleText = new nu::Text(nu::Resources().Get<nu::Font>("Fonts/BitcountGridDouble-Black.ttf", 64.0f));
     m_titleText->Create(nu::Engine::Get().GetRenderer(), "Hello World", nu::Color{ 1.0f, 1.0f, 1.0f });
 
-    m_gameFont = new nu::Font();
-    m_gameFont->Load("Fonts/BitcountGridDouble-Black.ttf", 32);
+    m_gameFont = std::make_shared<nu::Font>();
+    m_gameFont->Load("Fonts/BitcountGridDouble-Black.ttf", 32.0f);
 
-    m_scoreText = new nu::Text(m_gameFont);
-    m_livesText = new nu::Text(m_gameFont);
+    m_scoreText = new nu::Text(nu::Resources().Get<nu::Font>("Fonts/BitcountGridDouble-Black.ttf", 32.0f));
+    m_livesText = new nu::Text(nu::Resources().Get<nu::Font>("Fonts/BitcountGridDouble-Black.ttf", 32.0f));
     
 
     return true;
