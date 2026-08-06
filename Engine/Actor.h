@@ -1,12 +1,14 @@
 #pragma once
 #include "Transform.h"
 #include "Model.h"
+#include "Resource.h"
 #include <string>
 #include <memory>
 
 namespace nu {
 
     class Scene;
+    class Texture;
 
     struct ActorDesc {
         std::string name;
@@ -15,14 +17,15 @@ namespace nu {
         Vector2 velocity { 0.0f, 0.0f };
         float damping { 0.0f };
         float lifespan { 0.0f };
-        std::shared_ptr<Model> model;
+        res_t<Model> model;
+        res_t<Texture> texture;
     };
 
     class Actor {
     public:
         Actor() = default;
         Actor(const ActorDesc& ActorDesc) : m_name{ ActorDesc.name }, m_tag{ ActorDesc.tag }, m_transform{ ActorDesc.transform },
-            m_velocity{ ActorDesc.velocity }, m_damping{ ActorDesc.damping }, m_lifespan{ ActorDesc.lifespan}, m_model{ ActorDesc.model } {}
+            m_velocity{ ActorDesc.velocity }, m_damping{ ActorDesc.damping }, m_lifespan{ ActorDesc.lifespan }, m_model{ ActorDesc.model }, m_texture{ ActorDesc.texture } {}
 
         virtual void Update(float dt);
         virtual void Draw(const class Renderer& renderer) const;
@@ -62,7 +65,10 @@ namespace nu {
         float m_damping{ 0.0f };
         float m_lifespan { 0.0f };
         bool m_destroyed { false };
-        std::shared_ptr<Model> m_model;
+
+        res_t<Model> m_model;
+        res_t<Texture> m_texture;
+
         Scene* m_scene{ nullptr };
     };
 

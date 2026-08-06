@@ -24,8 +24,8 @@ bool SpaceGame::Initialize() {
     m_titleText = new nu::Text(nu::Resources().Get<nu::Font>("Fonts/BitcountGridDouble-Black.ttf", 64.0f));
     m_titleText->Create(nu::Engine::Get().GetRenderer(), "Hello World", nu::Color{ 1.0f, 1.0f, 1.0f });
 
-    m_gameFont = std::make_shared<nu::Font>();
-    m_gameFont->Load("Fonts/BitcountGridDouble-Black.ttf", 32.0f);
+    //m_gameFont = std::make_shared<nu::Font>();
+    //m_gameFont->Load("Fonts/BitcountGridDouble-Black.ttf", 32.0f);
 
     m_scoreText = new nu::Text(nu::Resources().Get<nu::Font>("Fonts/BitcountGridDouble-Black.ttf", 32.0f));
     m_livesText = new nu::Text(nu::Resources().Get<nu::Font>("Fonts/BitcountGridDouble-Black.ttf", 32.0f));
@@ -82,6 +82,7 @@ void SpaceGame::Update(float dt) {
 }
 
 void SpaceGame::Draw(nu::Renderer& renderer) {
+    //renderer.DrawTexture(*nu::Resources().Get<nu::Texture>("Textures/background.png"), nu::Engine::Get().GetRenderer(), );
     switch (m_gameState) {
     case GameState::TITLE:
         m_titleText->Create(nu::Engine::Get().GetRenderer(), "Totally Realistic Space Combat", nu::Color{ 1.0f, 1.0f, 1.0f });
@@ -123,8 +124,9 @@ void SpaceGame::SpawnPlayer() {
 
     PlayerDesc playerDesc;
     playerDesc.name = "Player";
-    playerDesc.model = Assets::playerModel;
-    playerDesc.transform = nu::Transform{ nu::Vector2 { 860.0f, 512.0f }, 0.0f, 50.0f };
+    //playerDesc.model = Assets::playerModel;
+	playerDesc.texture = nu::Resources().Get<nu::Texture>("Textures/player.png", nu::Engine::Get().GetRenderer());
+    playerDesc.transform = nu::Transform{ nu::Vector2 { 860.0f, 512.0f }, 0.0f, 1.0f };
     playerDesc.speed = 600.0f;
     playerDesc.damping = 1.5f;
 
@@ -137,8 +139,9 @@ void SpaceGame::SpawnEnemy() {
     if (enemyIndex == 0) {
         EnemyDesc enemyDesc;
         enemyDesc.name = "Enemy";
-        enemyDesc.model = Assets::enemyModel;
-        enemyDesc.transform = nu::Transform{ nu::Vector2 { nu::RandomFloat((float)nu::Engine::Get().GetRenderer().GetWidth()), nu::RandomFloat((float)nu::Engine::Get().GetRenderer().GetHeight())}, 180.0f, 25.0f };
+        //enemyDesc.model = Assets::enemyModel;
+        enemyDesc.texture = enemyDesc.texture = nu::Resources().Get<nu::Texture>("Textures/enemy.png", nu::Engine::Get().GetRenderer());
+        enemyDesc.transform = nu::Transform{ nu::Vector2 { nu::RandomFloat((float)nu::Engine::Get().GetRenderer().GetWidth()), nu::RandomFloat((float)nu::Engine::Get().GetRenderer().GetHeight())}, 180.0f, 1.0f };
         enemyDesc.speed = nu::RandomFloat(100.0f, 300.0f);
         enemyDesc.damping = 1.5f;
         enemyDesc.health = 1.0f;
