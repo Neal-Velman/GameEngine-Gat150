@@ -2,14 +2,12 @@
 
 namespace nu {
     template <typename T>
-    class Singleton
-    {
+    class Singleton {
     public:
         Singleton(const Singleton&) = delete;
         Singleton& operator=(const Singleton&) = delete;
 
-        static T& Instance()
-        {
+        static T& Instance() {
             static T instance;
             return instance;
         }
