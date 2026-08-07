@@ -218,7 +218,7 @@ int main() {
         nu::Engine::Get().GetRenderer().SetColor(0.0f, 0.0f, 0.0f);
         nu::Engine::Get().GetRenderer().Clear();
 
-        nu::Engine::Get().GetRenderer().DrawTexture(*nu::Resources().Get<nu::Texture>("Textures/catSmirk.jpg", nu::Engine::Get().GetRenderer()), 30, 30, 60.0f);
+        
         game.Draw(nu::Engine::Get().GetRenderer());
 
         nu::Engine::Get().GetPS().Draw(nu::Engine::Get().GetRenderer());

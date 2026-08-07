@@ -3,7 +3,7 @@
 #include "Actor.h"
 
 struct BulletDesc : public nu::ActorDesc {
-	float speed;
+	float speed { 0.0f };
 };
 
 class Bullet : public nu::Actor {

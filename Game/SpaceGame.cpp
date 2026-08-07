@@ -82,6 +82,7 @@ void SpaceGame::Update(float dt) {
 }
 
 void SpaceGame::Draw(nu::Renderer& renderer) {
+    nu::Engine::Get().GetRenderer().DrawBackground(*nu::Resources().Get<nu::Texture>("Textures/catSmirk.jpg", nu::Engine::Get().GetRenderer()), 30, 30, 0.0f, 30);
     //renderer.DrawTexture(*nu::Resources().Get<nu::Texture>("Textures/background.png"), nu::Engine::Get().GetRenderer(), );
     switch (m_gameState) {
     case GameState::TITLE:
@@ -97,7 +98,7 @@ void SpaceGame::Draw(nu::Renderer& renderer) {
         m_scoreText->Draw(renderer, 30, 30);
 
         m_scoreText->Create(renderer, "Lives: " + std::to_string(m_lives), { 1.0f, 1.0f, 1.0f });
-        m_scoreText->Draw(renderer, (float)renderer.GetWidth() - 160, (float)30);
+        m_scoreText->Draw(renderer, (float)renderer.GetWidth() - 360, (float)30);
         break;
     case GameState::GAME_OVER:
         break;
@@ -140,7 +141,7 @@ void SpaceGame::SpawnEnemy() {
         EnemyDesc enemyDesc;
         enemyDesc.name = "Enemy";
         //enemyDesc.model = Assets::enemyModel;
-        enemyDesc.texture = enemyDesc.texture = nu::Resources().Get<nu::Texture>("Textures/enemy.png", nu::Engine::Get().GetRenderer());
+        enemyDesc.texture = nu::Resources().Get<nu::Texture>("Textures/enemy.png", nu::Engine::Get().GetRenderer());
         enemyDesc.transform = nu::Transform{ nu::Vector2 { nu::RandomFloat((float)nu::Engine::Get().GetRenderer().GetWidth()), nu::RandomFloat((float)nu::Engine::Get().GetRenderer().GetHeight())}, 180.0f, 1.0f };
         enemyDesc.speed = nu::RandomFloat(100.0f, 300.0f);
         enemyDesc.damping = 1.5f;
@@ -152,8 +153,9 @@ void SpaceGame::SpawnEnemy() {
     else if (enemyIndex == 1) {
         EnemyDesc enemyDesc;
         enemyDesc.name = "Enemy";
-        enemyDesc.model = Assets::enemy2Model;
-        enemyDesc.transform = nu::Transform{ nu::Vector2 { nu::RandomFloat((float)nu::Engine::Get().GetRenderer().GetWidth()), nu::RandomFloat((float)nu::Engine::Get().GetRenderer().GetHeight())}, 180.0f, 25.0f };
+        //enemyDesc.model = Assets::enemy2Model;
+        enemyDesc.texture = nu::Resources().Get<nu::Texture>("Textures/enemy2.png", nu::Engine::Get().GetRenderer());
+        enemyDesc.transform = nu::Transform{ nu::Vector2 { nu::RandomFloat((float)nu::Engine::Get().GetRenderer().GetWidth()), nu::RandomFloat((float)nu::Engine::Get().GetRenderer().GetHeight())}, 180.0f, 1.0f };
         enemyDesc.speed = nu::RandomFloat(300.0f, 600.0f);
         enemyDesc.damping = 1.5f;
         enemyDesc.health = 3.0f;
@@ -163,5 +165,3 @@ void SpaceGame::SpawnEnemy() {
     }
         
 }
-
-//(nu::RandomInt(2)) ? Assets::enemyModel : Assets::enemyModel2;
