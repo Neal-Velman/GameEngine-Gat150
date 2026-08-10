@@ -1,15 +1,16 @@
 #include "Engine.h"
 #include "Player.h"
 #include "Enemy.h"
-#include <fmod.hpp>
 #include "Assets.h"
 #include "SpaceGame.h"
 
 #include <iostream>
 #include <vector>
+#include <fmod.hpp>
 #include <map>
 #include <memory>
 #include <random>
+#include <fstream>
 
 //class Object {
 //
@@ -124,6 +125,87 @@ int main() {
 
     // INITIALIZATION
     nu::SetWorkingDirectory("Assets");
+
+    //{
+    //    // read file (input file)
+    //    std::ifstream file("Data/Test.txt");
+    //    if (file.is_open()) {
+    //        std::string str;
+    //        while (std::getline(file, str)) {
+    //            std::cout << str << std::endl;
+    //        }
+    //    } else {
+    //        std::cout << "Unable to open file" << std::endl;
+    //    }
+    //    file.close();
+    //}
+
+    //{
+    //    // read file (output file)
+    //    std::ofstream file("Data/Test.txt", std::ios::app);
+    //    if (file.is_open()) {
+    //        file << "How's it going?\n";
+    //    }
+
+
+    //}
+
+    //{
+    //    // read / write (input / output file)
+    //    std::fstream file("Data/Test.txt", std::ios::in | std::ios::out | std::ios::app);
+    //    if (file.is_open()) {
+    //        file << "Add a line\n";
+    //        file.seekg(0);
+    //        std::string str;
+    //        while (std::getline(file, str)) {
+    //            std::cout << str << std::endl;
+    //        }
+    //    }
+
+
+    //}
+
+    //{
+    //    std::string name;
+    //    int score;
+    //    bool isAlive;
+
+    //    bool save = false;
+
+    //    if (save) {
+    //        name = "Neal";
+    //        score = 12;
+    //        isAlive = true;
+
+    //        // save game data
+    //        std::ofstream file("Data/game.txt");
+    //        if (file.is_open()) {
+    //            file << name << "\n";
+    //            file << score << "\n";
+    //            file << std::boolalpha << isAlive << "\n";
+    //        }
+    //    }
+    //    bool load = true;
+    //    if (load) {
+    //        // load game data
+    //        std::ifstream file("Data/game.txt");
+    //        if (file.is_open()) {
+    //            std::getline(file, name);
+    //            std::string str;
+    //            std::getline(file, str);
+    //            score = std::stoi(str);
+
+    //            //file >> score;
+    //            file >> std::boolalpha >> isAlive;
+    //        }
+    //    }
+    //    // Display game data
+    //    std::cout << name << std::endl;
+    //    std::cout << score << std::endl;
+    //    std::cout << isAlive << std::endl;
+    //}
+
+    //return 0;
 
     nu::Engine::Get().Initialize();
 

@@ -11,6 +11,7 @@ namespace nu {
 		Vector2 position{ 0.0f, 0.0f };
 		Vector2 velocity{ 0.0f, 0.0f };
 		Color color{ 0.0f, 0.0f, 0.0f };
+		//res_t<Texture> texture{ nullptr };
 	};
 
 	class ParticleSystem {

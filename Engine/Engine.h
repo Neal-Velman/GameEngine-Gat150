@@ -6,6 +6,7 @@
 #include "Text.h"
 #include "Texture.h"
 #include "ResourceManager.h"
+#include "Json.h"
 
 // Systems
 #include "Renderer.h"

@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "ParticleSystem.h"
 #include "Renderer.h"
+#include "Texture.h"
 
 namespace nu {
 
@@ -51,6 +52,8 @@ namespace nu {
 				renderer.SetColor(particle.color.r, particle.color.g, particle.color.b);
 				// TODO: draw point with particle position
 				renderer.DrawPoint(particle.position.x, particle.position.y);
+
+				//renderer.DrawTexture(*particle.texture, particle.position.x, particle.position.y, 0.0f, 0.1f);
 			}
 		}
 	}

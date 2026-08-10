@@ -3,6 +3,7 @@
 #include "Engine.h"
 #include "Bullet.h"
 #include "Assets.h"
+#include "Particle.h"
 #include "SpaceGame.h"
 
 void Player::Update(float dt) {
@@ -52,19 +53,53 @@ void Player::Update(float dt) {
     }
 
     if (thrust) {
-        nu::Particle particle;
+        ParticleDesc particleDesc;
+        particleDesc.name = "Particle";
+        particleDesc.tag = "PlayerParticle";
+        //desc.model = Assets::bulletModel;
+        switch (nu::RandomInt(4)) {
+        case 0:
+            particleDesc.texture = nu::Resources().Get<nu::Texture>("Textures/blackParticle.png", nu::Engine::Get().GetRenderer());
+            break;
+        case 1:
+            particleDesc.texture = nu::Resources().Get<nu::Texture>("Textures/redParticle.png", nu::Engine::Get().GetRenderer());
+            break;
+        case 2:
+            particleDesc.texture = nu::Resources().Get<nu::Texture>("Textures/yellowParticle.png", nu::Engine::Get().GetRenderer());
+            break;
+        case 3:
+            particleDesc.texture = nu::Resources().Get<nu::Texture>("Textures/whiteParticle.png", nu::Engine::Get().GetRenderer());
+            break;
+        default:
+            break;
+        }
+        
+        particleDesc.transform = m_transform;
+        particleDesc.transform.scale = 0.1f;
+        particleDesc.speed = -400.0f;
+        particleDesc.lifespan = 2.0f;
 
-        nu::Vector2 offset{ -20.0f, 0.0f };
-        offset = offset.Rotate(m_transform.rotation * 3.1415926535897932384626433832795f / 180.0f);
+        m_scene->AddActor(std::move(std::make_unique<Particle>(particleDesc)));
 
-        nu::Color colors[3] = { { 1.0f, 1.0f, 1.0f }, {1.0f, 0.0f, 0.0f}, {1.0f, 1.0f, 0.0f} };
-        particle.position = m_transform.position + offset;
-        particle.color = colors[nu::RandomInt(3)];
-        particle.lifespan = nu::RandomFloat(0.5f, 1.5f);
-        particle.velocity = nu::Vector2{nu::RandomFloat(-30.0f, -100.0f), 0.0f}.Rotate((m_transform.rotation + nu::RandomInt(-25, 25)) * 3.1415926535897932384626433832795f / 180.0f);
-        //{ nu::RandomFloat(-200.0f, 200.0f), nu::RandomFloat(-200.0f, 200.0f) };
+        particleDesc.transform.rotation += nu::RandomFloat(20.0f);
+        m_scene->AddActor(std::move(std::make_unique<Particle>(particleDesc)));
 
-        nu::Engine::Get().GetPS().AddParticle(particle);
+        particleDesc.transform.rotation -= nu::RandomFloat(40.0f);
+        m_scene->AddActor(std::move(std::make_unique<Particle>(particleDesc)));
+
+        //nu::Particle particle;
+
+        //nu::Vector2 offset{ -20.0f, 0.0f };
+        //offset = offset.Rotate(m_transform.rotation * 3.1415926535897932384626433832795f / 180.0f);
+
+        //nu::Color colors[3] = { { 1.0f, 1.0f, 1.0f }, {1.0f, 0.0f, 0.0f}, {1.0f, 1.0f, 0.0f} };
+        //particle.position = m_transform.position + offset;
+        //particle.color = colors[nu::RandomInt(3)];
+        //particle.lifespan = nu::RandomFloat(0.5f, 1.5f);
+        //particle.velocity = nu::Vector2{nu::RandomFloat(-30.0f, -100.0f), 0.0f}.Rotate((m_transform.rotation + nu::RandomInt(-25, 25)) * 3.1415926535897932384626433832795f / 180.0f);
+        ////{ nu::RandomFloat(-200.0f, 200.0f), nu::RandomFloat(-200.0f, 200.0f) };
+
+        //nu::Engine::Get().GetPS().AddParticle(particle);
     }
     
 

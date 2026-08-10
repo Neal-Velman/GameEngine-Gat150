@@ -82,7 +82,7 @@ void SpaceGame::Update(float dt) {
 }
 
 void SpaceGame::Draw(nu::Renderer& renderer) {
-    nu::Engine::Get().GetRenderer().DrawBackground(*nu::Resources().Get<nu::Texture>("Textures/catSmirk.jpg", nu::Engine::Get().GetRenderer()), 30, 30, 0.0f, 30);
+    nu::Engine::Get().GetRenderer().DrawBackground(*nu::Resources().Get<nu::Texture>("Textures/Background.jpg", nu::Engine::Get().GetRenderer()), 30, 30, 0.0f, 30);
     //renderer.DrawTexture(*nu::Resources().Get<nu::Texture>("Textures/background.png"), nu::Engine::Get().GetRenderer(), );
     switch (m_gameState) {
     case GameState::TITLE:
