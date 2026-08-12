@@ -7,6 +7,8 @@
 #include "Texture.h"
 #include "ResourceManager.h"
 #include "Json.h"
+#include "StringUtils.h"
+#include "Factory.h"
 
 // Systems
 #include "Renderer.h"

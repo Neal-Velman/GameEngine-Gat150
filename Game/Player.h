@@ -14,6 +14,10 @@ public:
 
 	void OnCollision(Actor* other);
 
+	float GetSpeed() { return m_speed; }
+
+	void Read(const nu::json::value_t& value) override;
+
 private:
 	int m_ammo = 0;
 	float m_speed = 400.0f;

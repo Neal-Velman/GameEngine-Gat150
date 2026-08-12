@@ -12,125 +12,143 @@
 #include <random>
 #include <fstream>
 
-//class Object {
-//
+class Animal {
+
+public:
+    virtual void speak() {
+        std::cout << "Animal noises" << std::endl;
+    }
+
+};
+
+class Cat : public Animal {
+public:
+    void speak() override {
+        std::cout << "Meow" << std::endl;
+    }
+};
+
+class Dog : public Animal {
+public:
+    void speak() override {
+        std::cout << "Woof" << std::endl;
+    }
+};
+
+class Cow : public Animal {
+public:
+    void speak() override {
+        std::cout << "Moo" << std::endl;
+    }
+};
+
+enum class Type {
+    CAT = 1,
+    DOG,
+    COW
+};
+
+Animal* AnimalFactory(const std::string& id) {
+    Animal* animal = nullptr;
+
+    if (nu::ToLower(id) == "CAT") animal = new Cat();
+    else if (nu::ToUpper(id) == "DOG") animal = new Dog();
+    else if (nu::EqualsIgnoreCase(id, "COW")) animal = new Cow();
+
+    return animal;
+}
+
+//class ICreator {
 //public:
-//    Object() { std::cout << "Constructor" << std::endl; }
-//    ~Object() { std::cout << "Destructor" << std::endl; }
-//
-//    Object(const Object& object) { std::cout << "Copy" << std::endl; }
-//    Object& operator = (const Object& object) { std::cout << "Assignment" << std::endl; return *this; }
-//
+//    virtual ~ICreator() = default;
+//    virtual std::unique_ptr<Animal> Create() = 0;
 //};
 //
-//uint32_t seed = 1234;
+//template <typename T>
+//class Creator : public ICreator {
+//public:
+//    std::unique_ptr<Animal> Create() override { return std::make_unique<T>(); }
+//};
 //
-//uint32_t RNG() {
+//std::map<std::string, std::unique_ptr<ICreator>> registry;
+
+
+//enum class Type {
+//    CAT = 1,
+//    DOG,
+//    COW
+//};
 //
-//    seed = (seed * 1103515245) + 12345;
+//Animal* AnimalFactory(const std::string& id) {
+//    Animal* animal = nullptr;
+//    switch (id) {
+//    case Type::CAT:
+//        animal = new Cat();
+//        break;
+//    case Type::DOG:
+//        animal = new Dog();
+//        break;
+//    case Type::COW:
+//        animal = new Cow();
+//        break;
+//    default:
+//        std::cout << "Invalid selection" << std::endl;
+//        break;
+//    }
 //
-//    return seed;
 //
+//    return animal;
 //}
 
-
 int main() {
+    // KEEP AT DA TOP!!!!!!!!!!!!!!!!!!!!!
+    nu::SetWorkingDirectory("Assets");
+    // KEEP AT DA TOP!!!!!!!!!!!!!!!!!!!!!
 
 
+    nu::Factory::Instance().Register<nu::Actor>("Actor");
+    nu::Factory::Instance().Register<nu::Object>("Object");
+    nu::Factory::Instance().Register<Player>("Player");
 
+    auto actor = nu::Factory::Instance().Create<nu::Actor>("Actor");
+    std::cout << actor->IsActive() << std::endl;
 
-    /*
-    // Rand()
-    for (size_t i = 0; i < 10; i++) { std::cout << RNG() << " "; }
-    std::cout << std::endl;
+    auto object = nu::Factory::Instance().Create("Object");
+    std::cout << object->IsActive() << std::endl;
 
-    seed = 1234;
+    auto player = nu::Factory::Instance().Create<Player>("Player");
+    std::cout << player->IsActive() << std::endl;
 
-    for (size_t i = 0; i < 10; i++) { std::cout << RNG() << " "; }
-    std::cout << std::endl;
-
-    nu::SeedRandom((unsigned int)time(NULL));
-
-    for (size_t i = 0; i < 10; i++) { std::cout << rand() << " "; }
-    std::cout << std::endl;
-
-    // <Random>
-    std::random_device randomDevice;
-    std::cout << randomDevice.min() << std::endl;
-    std::cout << randomDevice.max() << std::endl;
-    std::cout << randomDevice.entropy() << std::endl;
-
-    std::mt19937 generator(randomDevice());
-
-    std::uniform_int_distribution<> dist(0, 20);
-
-    for (size_t i = 0; i < 10; i++) { std::cout << dist(generator) << " "; }
-    std::cout << std::endl;
-
-    std::uniform_real_distribution<float> distReal(-10.0f, 10.0f);
-
-    for (size_t i = 0; i < 10; i++) { std::cout << distReal(generator) << " "; }
-    std::cout << std::endl;
-
-    std::cout << "---------- Object ----------" << std::endl;
-    {
-        Object objectA;
-        Object objectB(objectA);
-        Object objectC;
-        objectC = objectA;
+    nu::json::document_t document;
+    if (nu::json::Load("Data/scene.json", document)) {
+        player->Read(document);
+        std::cout << player->GetName() << std::endl;
+        std::cout << player->GetTag() << std::endl;
+        std::cout << player->GetTransform().rotation << std::endl;
+        std::cout << player->GetSpeed() << std::endl;
     }
 
-    std::cout << "---------- Raw Pointers ----------" << std::endl;
+
+    return 0;
+    /*registry["CAT"] = std::make_unique<Creator<Cat>>();
+    registry["DOG"] = std::make_unique<Creator<Dog>>();
     {
-        Object* objectA = new Object();
-        std::cout << objectA << std::endl;
-        Object* objectB = new Object(*objectA);
-        std::cout << objectB << std::endl;
-        Object* objectC = nullptr;
-        objectC = objectA;
-        std::cout << objectC << std::endl;
+        auto animal = registry["DOG"]->Create();
+        animal->speak();
+    }*/
+    
+ //   std::string selection;
+ //   std::cout << "Select an animal:" << std::endl;
+ //   std::cin >> selection;
+
+	//auto animal = AnimalFactory(selection);
+ //   animal->speak();
 
 
-		delete objectA;
-		delete objectB;
-		//delete objectC;
-    }
-
-    std::cout << "---------- Unique Pointers ----------" << std::endl;
-    {
-        std::unique_ptr<Object> objectA = std::make_unique<Object>();
-        std::cout << objectA.get() << std::endl;
-        std::unique_ptr<Object> objectB;
-        objectB = std::move(objectA);
-        std::cout << objectB.get() << std::endl;
-
-        objectB.reset();
-
-    }
-
-    std::cout << "---------- Shared Pointers ----------" << std::endl;
-    std::shared_ptr<Object> objectC;
-    {
-        std::shared_ptr<Object> objectA = std::make_shared<Object>();
-        std::cout << objectA.get() << std::endl;
-        std::cout << objectA.use_count() << std::endl;
-        auto objectB = objectA;
-        std::cout << objectB.get() << std::endl;
-        std::cout << objectB.use_count() << std::endl;
-        auto objectC = objectA;
-        std::cout << objectC.get() << std::endl;
-        std::cout << objectC.use_count() << std::endl;
-    }
-    std::cout << objectC.use_count() << std::endl;
-
-    //return 0;
-
-    */
 
     // INITIALIZATION
-    nu::SetWorkingDirectory("Assets");
 
-    // load the json data from a file
+/*    // load the json data from a file
     std::string buffer;
     if (nu::ReadTextFile("data/data.json", buffer))
     {
@@ -164,97 +182,10 @@ int main() {
         }
         
     }
+    */
 
-
-
-    return 0;
-
-    //{
-    //    // read file (input file)
-    //    std::ifstream file("Data/Test.txt");
-    //    if (file.is_open()) {
-    //        std::string str;
-    //        while (std::getline(file, str)) {
-    //            std::cout << str << std::endl;
-    //        }
-    //    } else {
-    //        std::cout << "Unable to open file" << std::endl;
-    //    }
-    //    file.close();
-    //}
-
-    //{
-    //    // read file (output file)
-    //    std::ofstream file("Data/Test.txt", std::ios::app);
-    //    if (file.is_open()) {
-    //        file << "How's it going?\n";
-    //    }
-
-
-    //}
-
-    //{
-    //    // read / write (input / output file)
-    //    std::fstream file("Data/Test.txt", std::ios::in | std::ios::out | std::ios::app);
-    //    if (file.is_open()) {
-    //        file << "Add a line\n";
-    //        file.seekg(0);
-    //        std::string str;
-    //        while (std::getline(file, str)) {
-    //            std::cout << str << std::endl;
-    //        }
-    //    }
-
-
-    //}
-
-    //{
-    //    std::string name;
-    //    int score;
-    //    bool isAlive;
-
-    //    bool save = false;
-
-    //    if (save) {
-    //        name = "Neal";
-    //        score = 12;
-    //        isAlive = true;
-
-    //        // save game data
-    //        std::ofstream file("Data/game.txt");
-    //        if (file.is_open()) {
-    //            file << name << "\n";
-    //            file << score << "\n";
-    //            file << std::boolalpha << isAlive << "\n";
-    //        }
-    //    }
-    //    bool load = true;
-    //    if (load) {
-    //        // load game data
-    //        std::ifstream file("Data/game.txt");
-    //        if (file.is_open()) {
-    //            std::getline(file, name);
-    //            std::string str;
-    //            std::getline(file, str);
-    //            score = std::stoi(str);
-
-    //            //file >> score;
-    //            file >> std::boolalpha >> isAlive;
-    //        }
-    //    }
-    //    // Display game data
-    //    std::cout << name << std::endl;
-    //    std::cout << score << std::endl;
-    //    std::cout << isAlive << std::endl;
-    //}
-
-    //return 0;
 
     nu::Engine::Get().Initialize();
-
-    // create texture, using shared_ptr so texture can be shared
-    //std::shared_ptr<nu::Texture> texture = std::make_shared<nu::Texture>();
-    //texture->Load("Textures/catSmirk.jpg", nu::Engine::Get().GetRenderer());
 
     SpaceGame game;
     game.Initialize();
@@ -265,21 +196,6 @@ int main() {
 
     void* extradriverdata = nullptr;
     audio->init(32, FMOD_INIT_NORMAL, extradriverdata);
-
-    std::vector<nu::Vector2> points;
-    /*std::vector<FMOD::Sound*> sounds;*/
-
-    //FMOD::Sound* sound = nullptr;
-    //audio->createSound("Audio/test.wav", FMOD_DEFAULT, 0, &sound);
-    ////audio->playSound(sound, 0, false, nullptr);
-
-    //FMOD::Sound* sound2 = nullptr;
-    //audio->createSound("Audio/bass.wav", FMOD_DEFAULT, 0, &sound2);
-    //sounds.push_back(sound2);
-
-    //FMOD::Sound* sound3 = nullptr;
-    //audio->createSound("Audio/cowbell.wav", FMOD_DEFAULT, 0, &sound3);
-    //sounds.push_back(sound3);
 
     bool quit = false;
     // MAIN LOOP
@@ -302,43 +218,7 @@ int main() {
         float dt = nu::Engine::Get().GetTime().GetDeltaTime();
         game.Update(dt);
 
-
-
-        /*if (nu::Engine::Get().GetInput().GetKeyPressed(SDL_SCANCODE_1)) {
-            audio->playSound(sounds[0], nullptr, false, nullptr);
-        }*/
-
-        /*if (nu::Engine::Get().GetInput().GetKeyPressed(SDL_SCANCODE_2)) {
-            audio->playSound(sounds[1], nullptr, false, nullptr);
-        }*/
-
-        if (nu::Engine::Get().GetInput().GetMouseDown(nu::Input::MouseButton::LEFT)) {
-            if (points.empty()) {
-                points.push_back(nu::Engine::Get().GetInput().GetMousePosition());
-            }
-            else {
-                nu::Vector2 v = points.back() - nu::Engine::Get().GetInput().GetMousePosition();
-                if (v.Length() > 10.0f) {
-                    points.push_back(nu::Engine::Get().GetInput().GetMousePosition());
-                }
-            }
-
-        }
-
-        if (nu::Engine::Get().GetInput().GetButtonPressed(nu::Input::MouseButton::RIGHT)) {
-            if (!points.empty()) {
-                points.pop_back();
-            }
-        }
-        
-
         // RENDER
-        for (int i = 0; i < (int)points.size() - 1; i++) {
-            nu::Engine::Get().GetRenderer().SetColor(nu::RandomFloat(), nu::RandomFloat(), nu::RandomFloat());
-            nu::Engine::Get().GetRenderer().DrawLine(points[i].x, points[i].y, points[i + 1].x, points[i+1].y);
-            nu::Engine::Get().GetRenderer().DrawFillRect(points[i].x, points[i].y, 10, 10);
-        }
-
         // Character
         nu::Engine::Get().GetRenderer().SetColor(0.0f, 0.0f, 0.0f);
         nu::Engine::Get().GetRenderer().Clear();

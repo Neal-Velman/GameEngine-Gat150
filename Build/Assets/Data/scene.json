@@ -1,0 +1,11 @@
+{
+  "name": "Neal",
+  "tag": "Student",
+  "active": true,
+  "speed": 400.0,
+  "transform": {
+    "position": [ 2.4, 5.3 ],
+    "rotation": 45,
+    "scale": 2
+  }
+}

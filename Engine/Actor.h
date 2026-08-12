@@ -2,8 +2,10 @@
 #include "Transform.h"
 #include "Model.h"
 #include "Resource.h"
+#include "Object.h"
 #include <string>
 #include <memory>
+
 
 namespace nu {
 
@@ -21,10 +23,10 @@ namespace nu {
         res_t<Texture> texture;
     };
 
-    class Actor {
+    class Actor : public Object {
     public:
         Actor() = default;
-        Actor(const ActorDesc& ActorDesc) : m_name{ ActorDesc.name }, m_tag{ ActorDesc.tag }, m_transform{ ActorDesc.transform },
+        Actor(const ActorDesc& ActorDesc) : m_tag{ ActorDesc.tag }, m_transform{ ActorDesc.transform },
             m_velocity{ ActorDesc.velocity }, m_damping{ ActorDesc.damping }, m_lifespan{ ActorDesc.lifespan }, m_model{ ActorDesc.model }, m_texture{ ActorDesc.texture } {}
 
         virtual void Update(float dt);
@@ -51,13 +53,13 @@ namespace nu {
 		void SetModel(std::shared_ptr<Model> model) { m_model = model; }
 
         void SetDestroyed(bool destroy = true) { m_destroyed = destroy; }
-
         bool GetDestroyed() const { return m_destroyed; }
+
+        virtual void Read(const json::value_t& value) override;
 
         friend Scene;
 
     protected:
-        std::string m_name;
         std::string m_tag;
 
         Transform m_transform;
