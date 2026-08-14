@@ -1,11 +1,68 @@
 {
-  "name": "Neal",
-  "tag": "Student",
-  "active": true,
-  "speed": 400.0,
-  "transform": {
-    "position": [ 2.4, 5.3 ],
-    "rotation": 45,
-    "scale": 2
-  }
+  "actors": [
+    {
+      "name": "PlayerPrototype",
+      "type": "Player",
+      "prototype": true,
+      "tag": "Player",
+      "active": true,
+      "speed": 600,
+      "damping": 1.5,
+      "texture": "Textures/player.png",
+      "transform": {
+        "position": [ 860, 512 ],
+        "rotation": 0,
+        "scale": 1
+      }
+    },
+    {
+      "name": "EnemyPrototype",
+      "type": "Enemy",
+      "prototype": true,
+      "tag": "Enemy",
+      "active": true,
+      "speed": 400,
+      "points": 100,
+      "health": 1,
+      "damping": 1.5,
+      "texture": "Textures/enemy.png",
+      "transform": {
+        "position": [ 860, 512 ],
+        "rotation": 0,
+        "scale": 1
+      }
+    },
+    {
+      "name": "BulletPrototype",
+      "type": "Bullet",
+      "prototype": true,
+      "tag": "Bullet",
+      "active": true,
+      "speed": 400,
+      "damping": 1.5,
+      "texture": "Textures/bullet.png",
+      "transform": {
+        "position": [ 860, 512 ],
+        "rotation": 0,
+        "scale": 1
+      }
+    },
+    {
+      "name": "Enemy2Prototype",
+      "type": "Enemy",
+      "prototype": true,
+      "tag": "Enemy",
+      "active": true,
+      "speed": 600,
+      "points": 500,
+      "health": 3,
+      "damping": 1.5,
+      "texture": "Textures/enemy2.png",
+      "transform": {
+        "position": [ 860, 512 ],
+        "rotation": 0,
+        "scale": 1
+      }
+    }
+  ]
 }

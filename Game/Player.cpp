@@ -130,7 +130,7 @@ void Player::Update(float dt) {
 }
 
 void Player::OnCollision(Actor* other) {
-    if (other->GetName() == "Enemy") {
+    if (other->GetTag() == "Enemy") {
         //nu::Engine::Get().GetAudio().PlaySound("Explosion");
         SetDestroyed();
         ((SpaceGame*)m_scene->GetGame())->OnPlayerDead();

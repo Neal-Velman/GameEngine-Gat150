@@ -29,6 +29,8 @@ namespace nu {
         Actor(const ActorDesc& ActorDesc) : m_tag{ ActorDesc.tag }, m_transform{ ActorDesc.transform },
             m_velocity{ ActorDesc.velocity }, m_damping{ ActorDesc.damping }, m_lifespan{ ActorDesc.lifespan }, m_model{ ActorDesc.model }, m_texture{ ActorDesc.texture } {}
 
+        CLASS_PROTOTYPE(Actor)
+
         virtual void Update(float dt);
         virtual void Draw(const class Renderer& renderer) const;
 
@@ -40,7 +42,7 @@ namespace nu {
         void SetRotation(float rotation) { m_transform.rotation = rotation; }
         void SetScale(float scale) { m_transform.scale = scale; }
 
-        const nu::Vector2& GetVelocity() { return m_velocity; }
+        const Vector2& GetVelocity() { return m_velocity; }
         void SetVelocity(const Vector2& velocity) { m_velocity = velocity; }
         void AddVelocity(const Vector2& velocity) { m_velocity += velocity; }
 

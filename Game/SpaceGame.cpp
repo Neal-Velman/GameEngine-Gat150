@@ -7,30 +7,20 @@
 
 bool SpaceGame::Initialize() {
     Game::Initialize();
-    m_gameState = GameState::TITLE;
+
     m_scene = new nu::Scene();
-    m_spawnTime = 2.5f;
-    nu::Engine::Get().GetAudio().AddSound("Fire", "Audio/snd_fire.wav");
-    //nu::Engine::Get().GetAudio().AddSound("Explosion", "Audio/snd_explosion_small.wav");
-    //m_audio = new nu::Audio();
     m_scene->SetGame(this);
+    m_scene->Load("Data/scene.json");
+    m_gameState = GameState::TITLE;
+    m_spawnTime = 2.5f;
 
-	/*Resources().Get<Font>("Fonts/BitcountGridDouble-Black.ttf", 64);
-	Resources().Get<Texture>("Textures/player.png", nu::Engine::Get().GetRenderer());*/
-
-	/*m_titleFont = nu::Resources().Get<nu::Font>("Fonts/BitcountGridDouble-Black.ttf", 64);
-    m_titleFont->Load("Fonts/BitcountGridDouble-Black.ttf", 64);*/
-
+    nu::Engine::Get().GetAudio().AddSound("Fire", "Audio/snd_fire.wav");
     m_titleText = new nu::Text(nu::Resources().Get<nu::Font>("Fonts/BitcountGridDouble-Black.ttf", 64.0f));
     m_titleText->Create(nu::Engine::Get().GetRenderer(), "Hello World", nu::Color{ 1.0f, 1.0f, 1.0f });
-
-    //m_gameFont = std::make_shared<nu::Font>();
-    //m_gameFont->Load("Fonts/BitcountGridDouble-Black.ttf", 32.0f);
 
     m_scoreText = new nu::Text(nu::Resources().Get<nu::Font>("Fonts/BitcountGridDouble-Black.ttf", 32.0f));
     m_livesText = new nu::Text(nu::Resources().Get<nu::Font>("Fonts/BitcountGridDouble-Black.ttf", 32.0f));
     
-
     return true;
 }
 
@@ -83,7 +73,6 @@ void SpaceGame::Update(float dt) {
 
 void SpaceGame::Draw(nu::Renderer& renderer) {
     nu::Engine::Get().GetRenderer().DrawBackground(*nu::Resources().Get<nu::Texture>("Textures/Background.jpg", nu::Engine::Get().GetRenderer()), 30, 30, 0.0f, 30);
-    //renderer.DrawTexture(*nu::Resources().Get<nu::Texture>("Textures/background.png"), nu::Engine::Get().GetRenderer(), );
     switch (m_gameState) {
     case GameState::TITLE:
         m_titleText->Create(nu::Engine::Get().GetRenderer(), "Totally Realistic Space Combat", nu::Color{ 1.0f, 1.0f, 1.0f });
@@ -112,35 +101,47 @@ void SpaceGame::Draw(nu::Renderer& renderer) {
 void SpaceGame::OnPlayerDead() {
     m_lives--;
     m_gameState = (m_lives == 0) ? GameState::GAME_OVER : GameState::START_LEVEL;
-
-    //if (m_lives == 0) {
-    //    m_gameState = GameState::GAME_OVER;
-    //}
-    //else {
-    //    m_gameState = GameState::START_LEVEL;
-    //}
 }
 
 void SpaceGame::SpawnPlayer() {
 
-    PlayerDesc playerDesc;
-    playerDesc.name = "Player";
-    //playerDesc.model = Assets::playerModel;
-	playerDesc.texture = nu::Resources().Get<nu::Texture>("Textures/player.png", nu::Engine::Get().GetRenderer());
-    playerDesc.transform = nu::Transform{ nu::Vector2 { 860.0f, 512.0f }, 0.0f, 1.0f };
-    playerDesc.speed = 600.0f;
-    playerDesc.damping = 1.5f;
+    auto actor = nu::Factory::Instance().Create<nu::Actor>("PlayerPrototype");
+    m_scene->AddActor(std::move(actor));
 
-    std::unique_ptr<Player> player = std::make_unique<Player>(playerDesc);
-    m_scene->AddActor(std::move(player));
+    //nu::json::document_t document;
+    //if (nu::json::Load("Data/scene.json", document)) {
+    //    std::string type;
+    //    JSON_READ(document, type);
+
+    //    auto actor = nu::Factory::Instance().Create<nu::Actor>(type);
+    //    actor->Read(document);
+
+    //    std::cout << actor->GetName() << std::endl;
+    //    std::cout << actor->GetTag() << std::endl;
+
+    //    std::cout << actor->GetTransform().rotation << std::endl;
+
+    //}
+ //   PlayerDesc playerDesc;
+ //   playerDesc.name = "Player";
+ //   //playerDesc.model = Assets::playerModel;
+	//playerDesc.texture = nu::Resources().Get<nu::Texture>("Textures/player.png", nu::Engine::Get().GetRenderer());
+ //   playerDesc.transform = nu::Transform{ nu::Vector2 { 860.0f, 512.0f }, 0.0f, 1.0f };
+ //   playerDesc.speed = 600.0f;
+ //   playerDesc.damping = 1.5f;
+ //   std::unique_ptr<Player> player = std::make_unique<Player>(playerDesc);
+ //   m_scene->AddActor(std::move(player));
 }
 
 void SpaceGame::SpawnEnemy() {
     int enemyIndex = nu::RandomInt(2);
     if (enemyIndex == 0) {
-        EnemyDesc enemyDesc;
+        auto actor = nu::Factory::Instance().Create<nu::Actor>("EnemyPrototype");
+        actor->SetPosition(nu::Vector2{ nu::RandomFloat(1024.0f), nu::RandomFloat(800.0f) });
+        m_scene->AddActor(std::move(actor));
+       /* EnemyDesc enemyDesc;
         enemyDesc.name = "Enemy";
-        //enemyDesc.model = Assets::enemyModel;
+        enemyDesc.tag = "Enemy";
         enemyDesc.texture = nu::Resources().Get<nu::Texture>("Textures/enemy.png", nu::Engine::Get().GetRenderer());
         enemyDesc.transform = nu::Transform{ nu::Vector2 { nu::RandomFloat((float)nu::Engine::Get().GetRenderer().GetWidth()), nu::RandomFloat((float)nu::Engine::Get().GetRenderer().GetHeight())}, 180.0f, 1.0f };
         enemyDesc.speed = nu::RandomFloat(100.0f, 300.0f);
@@ -148,12 +149,16 @@ void SpaceGame::SpawnEnemy() {
         enemyDesc.health = 1.0f;
         enemyDesc.points = 100;
 
-        m_scene->AddActor(std::move(std::make_unique<Enemy>(enemyDesc)));
+        m_scene->AddActor(std::move(std::make_unique<Enemy>(enemyDesc)));*/
     }
     else if (enemyIndex == 1) {
-        EnemyDesc enemyDesc;
+        auto actor = nu::Factory::Instance().Create<nu::Actor>("Enemy2Prototype");
+        actor->SetPosition(nu::Vector2{ nu::RandomFloat(1024.0f), nu::RandomFloat(800.0f) });
+        m_scene->AddActor(std::move(actor));
+
+        /*EnemyDesc enemyDesc;
         enemyDesc.name = "Enemy";
-        //enemyDesc.model = Assets::enemy2Model;
+        enemyDesc.tag = "Enemy";
         enemyDesc.texture = nu::Resources().Get<nu::Texture>("Textures/enemy2.png", nu::Engine::Get().GetRenderer());
         enemyDesc.transform = nu::Transform{ nu::Vector2 { nu::RandomFloat((float)nu::Engine::Get().GetRenderer().GetWidth()), nu::RandomFloat((float)nu::Engine::Get().GetRenderer().GetHeight())}, 180.0f, 1.0f };
         enemyDesc.speed = nu::RandomFloat(300.0f, 600.0f);
@@ -161,7 +166,7 @@ void SpaceGame::SpawnEnemy() {
         enemyDesc.health = 3.0f;
         enemyDesc.points = 500;
 
-        m_scene->AddActor(std::move(std::make_unique<Enemy>(enemyDesc)));
+        m_scene->AddActor(std::move(std::make_unique<Enemy>(enemyDesc)));*/
     }
         
 }
