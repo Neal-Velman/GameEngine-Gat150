@@ -21,7 +21,6 @@ namespace nu {
 			JSON_READ_NAME(value, "active", m_active);
 		}
 
-
 	protected:
 		std::string m_name;
 		bool m_active = true;

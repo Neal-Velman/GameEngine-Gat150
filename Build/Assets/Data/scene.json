@@ -1,24 +1,29 @@
 {
   "actors": [
     {
-      "name": "PlayerPrototype",
       "type": "Player",
       "prototype": true,
+      "name": "PlayerPrototype",
       "tag": "Player",
       "active": true,
       "speed": 600,
       "damping": 1.5,
-      "texture": "Textures/player.png",
       "transform": {
         "position": [ 860, 512 ],
         "rotation": 0,
         "scale": 1
-      }
+      },
+      "components": [
+        {
+          "type": "SpriteRendererComponent",
+          "texture": "Textures/player.png"
+        }
+      ]
     },
     {
-      "name": "EnemyPrototype",
       "type": "Enemy",
       "prototype": true,
+      "name": "EnemyPrototype",
       "tag": "Enemy",
       "active": true,
       "speed": 400,
@@ -33,9 +38,9 @@
       }
     },
     {
-      "name": "BulletPrototype",
       "type": "Bullet",
       "prototype": true,
+      "name": "BulletPrototype",
       "tag": "Bullet",
       "active": true,
       "speed": 400,
@@ -48,9 +53,9 @@
       }
     },
     {
-      "name": "Enemy2Prototype",
       "type": "Enemy",
       "prototype": true,
+      "name": "Enemy2Prototype",
       "tag": "Enemy",
       "active": true,
       "speed": 600,

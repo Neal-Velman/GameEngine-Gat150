@@ -18,31 +18,13 @@ int main() {
     nu::SetWorkingDirectory("Assets");
     // KEEP AT DA TOP!!!!!!!!!!!!!!!!!!!!!
 
-    nu::Factory::Instance().Register<nu::Actor>("Actor");
+    /*nu::Factory::Instance().Register<nu::Actor>("Actor");
     nu::Factory::Instance().Register<nu::Object>("Object");
     nu::Factory::Instance().Register<Player>("Player");
     nu::Factory::Instance().Register<Enemy>("Enemy");
-    nu::Factory::Instance().Register<Bullet>("Bullet");
-    /*
-
-    auto actor = nu::Factory::Instance().Create<nu::Actor>("Actor");
-    std::cout << actor->IsActive() << std::endl;
-
-    auto object = nu::Factory::Instance().Create("Object");
-    std::cout << object->IsActive() << std::endl;
-
-    auto player = nu::Factory::Instance().Create<Player>("Player");
-    std::cout << player->IsActive() << std::endl;
-
-    
-
-
-    return 0;
-    */
+    nu::Factory::Instance().Register<Bullet>("Bullet");*/
 
     // INITIALIZATION
-
-
     nu::Engine::Get().Initialize();
 
     SpaceGame game;
@@ -51,12 +33,11 @@ int main() {
     // create audio system
     FMOD::System* audio;
     FMOD::System_Create(&audio);
-
     void* extradriverdata = nullptr;
     audio->init(32, FMOD_INIT_NORMAL, extradriverdata);
 
-    bool quit = false;
     // MAIN LOOP
+    bool quit = false;
 
     // UPDATE
     while (!quit) {
@@ -77,6 +58,7 @@ int main() {
         game.Update(dt);
 
         // RENDER
+
         // Character
         nu::Engine::Get().GetRenderer().SetColor(0.0f, 0.0f, 0.0f);
         nu::Engine::Get().GetRenderer().Clear();

@@ -16,8 +16,6 @@ bool SpaceGame::Initialize() {
 
     nu::Engine::Get().GetAudio().AddSound("Fire", "Audio/snd_fire.wav");
     m_titleText = new nu::Text(nu::Resources().Get<nu::Font>("Fonts/BitcountGridDouble-Black.ttf", 64.0f));
-    m_titleText->Create(nu::Engine::Get().GetRenderer(), "Hello World", nu::Color{ 1.0f, 1.0f, 1.0f });
-
     m_scoreText = new nu::Text(nu::Resources().Get<nu::Font>("Fonts/BitcountGridDouble-Black.ttf", 32.0f));
     m_livesText = new nu::Text(nu::Resources().Get<nu::Font>("Fonts/BitcountGridDouble-Black.ttf", 32.0f));
     
@@ -86,8 +84,8 @@ void SpaceGame::Draw(nu::Renderer& renderer) {
         m_scoreText->Create(renderer, "Score: " + std::to_string(m_score), { 1.0f, 1.0f, 1.0f });
         m_scoreText->Draw(renderer, 30, 30);
 
-        m_scoreText->Create(renderer, "Lives: " + std::to_string(m_lives), { 1.0f, 1.0f, 1.0f });
-        m_scoreText->Draw(renderer, (float)renderer.GetWidth() - 360, (float)30);
+        m_livesText->Create(renderer, "Lives: " + std::to_string(m_lives), { 1.0f, 1.0f, 1.0f });
+        m_livesText->Draw(renderer, (float)renderer.GetWidth() - 360, (float)30);
         break;
     case GameState::GAME_OVER:
         break;

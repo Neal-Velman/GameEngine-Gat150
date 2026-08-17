@@ -5,8 +5,8 @@
 #include "Particle.h"
 #include "SpaceGame.h"
 
+    FACTORY_REGISTER(Enemy)
 void Enemy::Update(float dt) {
-
     Player* player = m_scene->GetActorByName<Player>("PlayerPrototype");
 
     if (player) {
@@ -37,32 +37,6 @@ void Enemy::OnCollision(Actor* other) {
             //nu::Engine::Get().GetAudio().PlaySound("Explosion");
             SetDestroyed();
             for (int i = 0; i < 100; i++) {
-                    //ParticleDesc particleDesc;
-                    //particleDesc.name = "Particle";
-                    //particleDesc.tag = "EnemyParticle";
-                    ////desc.model = Assets::bulletModel;
-                    //switch (nu::RandomInt(4)) {
-                    //case 0:
-                    //    particleDesc.texture = nu::Resources().Get<nu::Texture>("Textures/blackParticle.png", nu::Engine::Get().GetRenderer());
-                    //    break;
-                    //case 1:
-                    //    particleDesc.texture = nu::Resources().Get<nu::Texture>("Textures/redParticle.png", nu::Engine::Get().GetRenderer());
-                    //    break;
-                    //case 2:
-                    //    particleDesc.texture = nu::Resources().Get<nu::Texture>("Textures/yellowParticle.png", nu::Engine::Get().GetRenderer());
-                    //    break;
-                    //case 3:
-                    //    particleDesc.texture = nu::Resources().Get<nu::Texture>("Textures/whiteParticle.png", nu::Engine::Get().GetRenderer());
-                    //    break;
-                    //default:
-                    //    break;
-                    //}
-
-                    //particleDesc.transform = m_transform;
-                    //particleDesc.transform.scale = 0.1f;
-                    //particleDesc.speed = nu::RandomFloat(-400.0f, 400.0f);
-                    //particleDesc.lifespan = 2.0f;
-
                     //m_scene->AddActor(std::move(std::make_unique<Particle>(particleDesc)));
                 nu::Particle particle;
                 particle.position = m_transform.position;
