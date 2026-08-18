@@ -105,30 +105,6 @@ void SpaceGame::SpawnPlayer() {
 
     auto actor = nu::Factory::Instance().Create<nu::Actor>("PlayerPrototype");
     m_scene->AddActor(std::move(actor));
-
-    //nu::json::document_t document;
-    //if (nu::json::Load("Data/scene.json", document)) {
-    //    std::string type;
-    //    JSON_READ(document, type);
-
-    //    auto actor = nu::Factory::Instance().Create<nu::Actor>(type);
-    //    actor->Read(document);
-
-    //    std::cout << actor->GetName() << std::endl;
-    //    std::cout << actor->GetTag() << std::endl;
-
-    //    std::cout << actor->GetTransform().rotation << std::endl;
-
-    //}
- //   PlayerDesc playerDesc;
- //   playerDesc.name = "Player";
- //   //playerDesc.model = Assets::playerModel;
-	//playerDesc.texture = nu::Resources().Get<nu::Texture>("Textures/player.png", nu::Engine::Get().GetRenderer());
- //   playerDesc.transform = nu::Transform{ nu::Vector2 { 860.0f, 512.0f }, 0.0f, 1.0f };
- //   playerDesc.speed = 600.0f;
- //   playerDesc.damping = 1.5f;
- //   std::unique_ptr<Player> player = std::make_unique<Player>(playerDesc);
- //   m_scene->AddActor(std::move(player));
 }
 
 void SpaceGame::SpawnEnemy() {
@@ -137,34 +113,10 @@ void SpaceGame::SpawnEnemy() {
         auto actor = nu::Factory::Instance().Create<nu::Actor>("EnemyPrototype");
         actor->SetPosition(nu::Vector2{ nu::RandomFloat(1024.0f), nu::RandomFloat(800.0f) });
         m_scene->AddActor(std::move(actor));
-       /* EnemyDesc enemyDesc;
-        enemyDesc.name = "Enemy";
-        enemyDesc.tag = "Enemy";
-        enemyDesc.texture = nu::Resources().Get<nu::Texture>("Textures/enemy.png", nu::Engine::Get().GetRenderer());
-        enemyDesc.transform = nu::Transform{ nu::Vector2 { nu::RandomFloat((float)nu::Engine::Get().GetRenderer().GetWidth()), nu::RandomFloat((float)nu::Engine::Get().GetRenderer().GetHeight())}, 180.0f, 1.0f };
-        enemyDesc.speed = nu::RandomFloat(100.0f, 300.0f);
-        enemyDesc.damping = 1.5f;
-        enemyDesc.health = 1.0f;
-        enemyDesc.points = 100;
-
-        m_scene->AddActor(std::move(std::make_unique<Enemy>(enemyDesc)));*/
     }
     else if (enemyIndex == 1) {
         auto actor = nu::Factory::Instance().Create<nu::Actor>("Enemy2Prototype");
         actor->SetPosition(nu::Vector2{ nu::RandomFloat(1024.0f), nu::RandomFloat(800.0f) });
         m_scene->AddActor(std::move(actor));
-
-        /*EnemyDesc enemyDesc;
-        enemyDesc.name = "Enemy";
-        enemyDesc.tag = "Enemy";
-        enemyDesc.texture = nu::Resources().Get<nu::Texture>("Textures/enemy2.png", nu::Engine::Get().GetRenderer());
-        enemyDesc.transform = nu::Transform{ nu::Vector2 { nu::RandomFloat((float)nu::Engine::Get().GetRenderer().GetWidth()), nu::RandomFloat((float)nu::Engine::Get().GetRenderer().GetHeight())}, 180.0f, 1.0f };
-        enemyDesc.speed = nu::RandomFloat(300.0f, 600.0f);
-        enemyDesc.damping = 1.5f;
-        enemyDesc.health = 3.0f;
-        enemyDesc.points = 500;
-
-        m_scene->AddActor(std::move(std::make_unique<Enemy>(enemyDesc)));*/
-    }
-        
+    }     
 }

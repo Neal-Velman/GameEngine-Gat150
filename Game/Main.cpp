@@ -13,10 +13,34 @@
 #include <random>
 #include <fstream>
 
+//class Example {
+//public:
+//    Example() = default;
+//    Example(int* i) : i{ i } {}
+//    ~Example() = default;
+//
+//    Example(const Example& other) {
+//        std::cout << "copy constructor" << std::endl;
+//        i = other.i;
+//    }
+//public:
+//    int i*{ nullptr };
+//};
+
 int main() {
     // KEEP AT DA TOP!!!!!!!!!!!!!!!!!!!!!
     nu::SetWorkingDirectory("Assets");
     // KEEP AT DA TOP!!!!!!!!!!!!!!!!!!!!!
+
+    //int* ptr = new int(5);
+
+    //Example example1{ ptr };
+    //Example example2{ example1 };
+
+    //std::cout << example1.i << std::endl;
+    //std::cout << example2.i << std::endl;
+
+    //return 0;
 
     /*nu::Factory::Instance().Register<nu::Actor>("Actor");
     nu::Factory::Instance().Register<nu::Object>("Object");

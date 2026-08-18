@@ -11,6 +11,20 @@ namespace nu {
 
     // lifespan
 	
+    Actor::Actor(const Actor& other) :
+        // Copy stuff
+        Object{ other },
+        m_tag{ other.m_tag },
+        m_transform{ other.m_transform },
+        m_damping{ other.m_damping },
+        m_lifespan{ other.m_lifespan } {
+        // Clone all components
+        for (const auto& component : other.m_components) {
+            auto clone = std::unique_ptr<Component>(dynamic_cast<Component*>(component->Clone().release()));
+            AddComponent(std::move(clone));
+        }
+    }
+
     // physics / acceleration
     void Actor::Update(float dt) {
         if (m_lifespan > 0.0f) {
@@ -18,7 +32,7 @@ namespace nu {
             m_destroyed = (m_lifespan <= 0.0f);
         }
 
-        for (auto component : m_components) {
+        for (auto& component : m_components) {
             component->Update(dt);
         }
 
@@ -32,9 +46,9 @@ namespace nu {
 
     void Actor::Draw(const nu::Renderer& renderer) const {
 
-        for (auto component : m_components) {
+        for (auto& component : m_components) {
             // Check if component is a renderer component
-            auto rendererComponent = dynamic_cast<RendererComponent*>(component);
+            auto rendererComponent = dynamic_cast<RendererComponent*>(component.get());
             if (rendererComponent) {
                 // draw renderer component
                 rendererComponent->Draw(renderer);
@@ -72,9 +86,14 @@ namespace nu {
 
                 if (component) {
                     component->Read(componentValue);
+                    AddComponent(std::move(component));
                 }
             }
         }
     }
 
+    void Actor::AddComponent(std::unique_ptr<Component> component) {
+        component->SetOwner(this);
+        m_components.push_back(std::move(component));
+    }
 }

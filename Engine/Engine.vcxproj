@@ -104,7 +104,6 @@
     <Lib>
       <AdditionalDependencies>;$(SolutionDir)ThirdParty\SDL\lib\$(PlatfromTarget)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty\SDL3\lib\$(PlatformTarget);</AdditionalLibraryDirectories>
-      <AdditionalOptions>/WHOLEARCHIVE %(AdditionalOptions)</AdditionalOptions>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -127,7 +126,6 @@
     <Lib>
       <AdditionalDependencies>;$(SolutionDir)ThirdParty\SDL\lib\$(PlatfromTarget)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty\SDL3\lib\$(PlatformTarget);</AdditionalLibraryDirectories>
-      <AdditionalOptions>/WHOLEARCHIVE %(AdditionalOptions)</AdditionalOptions>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -149,7 +147,6 @@
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty\SDL3\lib\$(PlatformTarget);$(SolutionDir)ThirdParty\fmod\core\lib\$(PlatformTarget);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalOptions>/WHOLEARCHIVE %(AdditionalOptions)</AdditionalOptions>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -172,13 +169,14 @@
     <Lib>
       <AdditionalDependencies>;$(SolutionDir)ThirdParty\SDL\lib\$(PlatfromTarget)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty\SDL3\lib\$(PlatformTarget);</AdditionalLibraryDirectories>
-      <AdditionalOptions>/WHOLEARCHIVE %(AdditionalOptions)</AdditionalOptions>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
     <ClInclude Include="Audio.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="Components\CircleColliderComponent.h" />
+    <ClInclude Include="Components\ColliderComponent.h" />
     <ClInclude Include="Components\RendererComponent.h" />
     <ClInclude Include="Components\SpriteRendererComponent.h" />
     <ClInclude Include="Factory.h" />
@@ -212,6 +210,7 @@
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="Audio.cpp" />
+    <ClCompile Include="Components\CircleColliderComponent.cpp" />
     <ClCompile Include="Components\SpriteRendererComponent.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="File.cpp" />

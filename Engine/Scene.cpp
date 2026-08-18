@@ -2,6 +2,7 @@
 #include "Scene.h"
 #include "Actor.h"
 #include "Factory.h"
+#include "Components/ColliderComponent.h"
 
 namespace nu {
 
@@ -81,12 +82,14 @@ namespace nu {
 		for (auto& actorA : m_actors) {
 			for (auto& actorB : m_actors) {
 				// Check for self, or destroyed objects
-				if (actorA == actorB || actorA->m_destroyed || actorB->m_destroyed) {
-					continue;
-				}
+				if (actorA == actorB || actorA->m_destroyed || actorB->m_destroyed) { continue; }
 
-				float distance = (actorA->m_transform.position - actorB->m_transform.position).Length();
-				if (distance <= actorA->GetRadius() + actorB->GetRadius()) {
+				auto colliderA = actorA->GetComponent<ColliderComponent>();
+				auto colliderB = actorB->GetComponent<ColliderComponent>();
+
+				if (!colliderA || !colliderB) { continue; }
+
+				if (colliderA->CheckCollision(*colliderB)) {
 					actorA->OnCollision(actorB.get());
 					actorB->OnCollision(actorA.get());
 				}

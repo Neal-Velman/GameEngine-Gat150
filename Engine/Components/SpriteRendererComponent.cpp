@@ -21,7 +21,7 @@ namespace nu {
 
 	void SpriteRendererComponent::Read(const json::value_t& value) {
 
-		Object::Read(value);
+		RendererComponent::Read(value);
 
 		std::string textureName;
 		JSON_READ_NAME(value, "texture", textureName);
@@ -29,5 +29,4 @@ namespace nu {
 			m_texture = Resources().Get<Texture>(textureName, Engine::Get().GetRenderer());
 		}
 	}
-
 }
