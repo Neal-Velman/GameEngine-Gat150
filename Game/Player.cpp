@@ -31,29 +31,21 @@ void Player::Update(float dt) {
 
         auto bullet = nu::Factory::Instance().Create<Bullet>("BulletPrototype");
         bullet->SetTransform(m_transform);
-        bullet->SetScale(2.0f);
         bullet->SetTag("PlayerBullet");
         m_scene->AddActor(std::move(bullet));
 
-        //BulletDesc desc;
-        //desc.name = "Bullet";
-        //desc.tag = "PlayerBullet";
-        ////desc.model = Assets::bulletModel;
-        //desc.texture = nu::Resources().Get<nu::Texture>("Textures/bullet.png", nu::Engine::Get().GetRenderer());
-        //desc.transform = m_transform;
-        //desc.transform.scale = 1.0f;
-        //desc.speed = 400.0f;
-        //desc.lifespan = 3.0f;
+        auto bullet2 = nu::Factory::Instance().Create<Bullet>("BulletPrototype");
+        bullet2->SetTransform(m_transform);
+        bullet2->SetTag("PlayerBullet");
+        bullet2->SetRotation(m_transform.rotation + 20.0f);
+        m_scene->AddActor(std::move(bullet2));
 
-        // create bullets
+        auto bullet3 = nu::Factory::Instance().Create<Bullet>("BulletPrototype");
+        bullet3->SetTransform(m_transform);
+        bullet3->SetTag("PlayerBullet");
+        bullet3->SetRotation(m_transform.rotation - 20.0f);
+        m_scene->AddActor(std::move(bullet3));
 
-        /*m_scene->AddActor(std::move(std::make_unique<Bullet>(desc)));
-
-        desc.transform.rotation += 20.0f;
-        m_scene->AddActor(std::move(std::make_unique<Bullet>(desc)));
-
-        desc.transform.rotation -= 40.0f;
-        m_scene->AddActor(std::move(std::make_unique<Bullet>(desc)));*/
 
         nu::Engine::Get().GetAudio().PlaySound("Fire");
     }
@@ -66,7 +58,6 @@ void Player::Update(float dt) {
 
         nu::Color colors[3] = { { 1.0f, 1.0f, 1.0f }, {1.0f, 0.0f, 0.0f}, {1.0f, 1.0f, 0.0f} };
         particle.position = m_transform.position + offset;
-        //particle.color = colors[nu::RandomInt(3)];
         switch (nu::RandomInt(4)) {
         case 0:
             particle.texture = nu::Resources().Get<nu::Texture>("Textures/blackParticle.png", nu::Engine::Get().GetRenderer());

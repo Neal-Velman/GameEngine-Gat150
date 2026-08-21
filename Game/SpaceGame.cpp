@@ -15,6 +15,7 @@ bool SpaceGame::Initialize() {
     m_spawnTime = 2.5f;
 
     nu::Engine::Get().GetAudio().AddSound("Fire", "Audio/snd_fire.wav");
+    //nu::Engine::Get().GetAudio().AddSound("Explosion", "Audio/explosion.wav");
     m_titleText = new nu::Text(nu::Resources().Get<nu::Font>("Fonts/BitcountGridDouble-Black.ttf", 64.0f));
     m_scoreText = new nu::Text(nu::Resources().Get<nu::Font>("Fonts/BitcountGridDouble-Black.ttf", 32.0f));
     m_livesText = new nu::Text(nu::Resources().Get<nu::Font>("Fonts/BitcountGridDouble-Black.ttf", 32.0f));

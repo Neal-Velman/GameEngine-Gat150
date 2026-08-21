@@ -42,14 +42,21 @@ namespace nu {
         void SetTransform(const Transform& transform) { m_transform = transform; }
 
         void SetPosition(const Vector2& position) { m_transform.position = position; }
+        const Vector2 GetPosition() const { return m_transform.position; }
+
         void SetRotation(float rotation) { m_transform.rotation = rotation; }
+        const Vector2 GetRotation() const { return m_transform.rotation; }
+
         void SetScale(float scale) { m_transform.scale = scale; }
+        const Vector2 GetScale() const { return m_transform.scale; }
 
         const Vector2& GetVelocity() { return m_velocity; }
         void SetVelocity(const Vector2& velocity) { m_velocity = velocity; }
         void AddVelocity(const Vector2& velocity) { m_velocity += velocity; }
 
+
         const std::string& GetName() const { return m_name; }
+
         void SetTag(const std::string& tag) { m_tag = tag; }
         const std::string& GetTag() const { return m_tag; }
 

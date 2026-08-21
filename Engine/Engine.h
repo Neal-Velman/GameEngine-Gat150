@@ -9,6 +9,7 @@
 #include "Json.h"
 #include "StringUtils.h"
 #include "Factory.h"
+#include "Physics.h"
 
 // Systems
 #include "Renderer.h"
@@ -40,6 +41,7 @@ namespace nu {
 		Time& GetTime() { return m_time; }
 		ParticleSystem& GetPS() { return m_particleSystem; }
 		Audio& GetAudio() { return m_audio; }
+		Physics& GetPhysics() { return m_physics; }
 
 		//Engine
 
@@ -52,6 +54,7 @@ namespace nu {
 		Time m_time;
 		ParticleSystem m_particleSystem;
 		Audio m_audio;
+		Physics m_physics;
 
 	};
 }

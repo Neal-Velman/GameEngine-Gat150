@@ -37,10 +37,8 @@ void Enemy::OnCollision(Actor* other) {
             //nu::Engine::Get().GetAudio().PlaySound("Explosion");
             SetDestroyed();
             for (int i = 0; i < 100; i++) {
-                    //m_scene->AddActor(std::move(std::make_unique<Particle>(particleDesc)));
                 nu::Particle particle;
                 particle.position = m_transform.position;
-                //particle.color = { 1.0f, 1.0f, 1.0f };
                 switch (nu::RandomInt(4)) {
                 case 0:
                     particle.texture = nu::Resources().Get<nu::Texture>("Textures/blackParticle.png", nu::Engine::Get().GetRenderer());

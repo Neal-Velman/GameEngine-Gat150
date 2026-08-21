@@ -9,7 +9,7 @@
 namespace nu {
 
 	bool Audio::Initialize() {
-		FMOD_RESULT result = FMOD::System_Create(/*TODO: pass address of m_fmodSystem*/&m_fmodSystem);
+		FMOD_RESULT result = FMOD::System_Create(&m_fmodSystem);
 		if (!CheckFMODResult(result))
 			return false;
 
@@ -22,11 +22,11 @@ namespace nu {
 	}
 
 	void Audio::Shutdown() {
-		CheckFMODResult(/*TODO: release() fmod system*/m_fmodSystem->release());
+		CheckFMODResult(m_fmodSystem->release());
 	}
 
 	void Audio::Update() {
-		CheckFMODResult(/*TODO: update() fmod system*/m_fmodSystem->update());
+		CheckFMODResult(m_fmodSystem->update());
 	}
 
 	bool Audio::AddSound(const std::string& name, const std::string& filename) {
@@ -34,9 +34,9 @@ namespace nu {
 		for (auto sound : m_sounds) {
 
 			if (/*TODO: check if name already exists in m_sounds*/sound.first == name) {
-			std::cerr << "Audio System : name already exists " << name << std::endl;
-			return false;
-		}
+				std::cerr << "Audio System : name already exists " << name << std::endl;
+				return false;
+			}
 
 		}
 		
@@ -44,14 +44,12 @@ namespace nu {
 		// create sound from key
 		FMOD::Sound* sound = nullptr;
 		FMOD_RESULT result = m_fmodSystem->createSound(filename.c_str(), FMOD_DEFAULT, 0, &sound);
-		if (!CheckFMODResult(result))
-			return false;
+		if (!CheckFMODResult(result)) { return false; }
 
 		
 		// insert sound into map
 		//TODO: add sound to m_sounds using name as key
 		m_sounds[name] = sound;
-		//m_sounds.insert_or_assign(name.c_str(), result);
 
 		return true;
 	}
@@ -67,9 +65,8 @@ namespace nu {
 		
 
 		// play sound from key
-		FMOD_RESULT result = m_fmodSystem->playSound(/*TODO: pass play sound parameters*/m_sounds[name], nullptr, false, nullptr);
-		if (!CheckFMODResult(result))
-			return false;
+		FMOD_RESULT result = m_fmodSystem->playSound(m_sounds[name], nullptr, false, nullptr);
+		if (!CheckFMODResult(result)) { return false; }
 
 		return true;
 	}
