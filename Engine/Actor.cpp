@@ -2,7 +2,7 @@
 #include "Actor.h"
 #include "Renderer.h"
 #include "Texture.h"
-#include "MathUtils.h"
+#include "Math/MathUtils.h"
 #include "Engine.h"
 #include "Components/RendererComponent.h"
 namespace nu {

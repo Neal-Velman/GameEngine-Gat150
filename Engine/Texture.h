@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "Vector2.h"
+#include "Math/Vector2.h"
 #include "Resource.h"
 
 struct SDL_Texture;

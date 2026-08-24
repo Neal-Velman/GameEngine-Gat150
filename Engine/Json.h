@@ -1,8 +1,8 @@
 #pragma once
 #include <rapidjson/document.h>
 #include <string>
-#include "Vector2.h"
-#include "Vector3.h"
+#include "Math/Vector2.h"
+#include "Math/Vector3.h"
 #define JSON_READ(value, data) nu::json::Read(value, #data, data)
 #define JSON_READ_NAME(value, name, data) nu::json::Read(value, name, data)
 

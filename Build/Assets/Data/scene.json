@@ -1,6 +1,24 @@
 {
   "actors": [
     {
+      "type": "Actor",
+      "prototype": false,
+      "name": "Bat",
+      "tag": "Enemy",
+      "active": true,
+      "transform": {
+        "position": [ 250, 200 ],
+        "rotation": 0,
+        "scale": 5
+      },
+      "components": [
+        {
+          "type": "SpriteRendererComponent",
+          "texture": "Textures/bat.png"
+        }
+      ]
+    },
+    {
       "type": "Player",
       "prototype": true,
       "name": "PlayerPrototype",

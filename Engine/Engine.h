@@ -1,8 +1,8 @@
 #pragma once
 #include "Random.h"
-#include "Vector2.h"
-#include "MathUtils.h"
-#include "Transform.h"
+#include "Math/Vector2.h"
+#include "Math/MathUtils.h"
+#include "Math/Transform.h"
 #include "Text.h"
 #include "Texture.h"
 #include "ResourceManager.h"

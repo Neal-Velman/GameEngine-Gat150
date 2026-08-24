@@ -1,10 +1,6 @@
 #include "pch.h"
 #include "Audio.h"
-#include <fmod.hpp>
-#include "fmod_errors.h"
 #include <string>
-#include <map>
-#include<iostream>
 
 namespace nu {
 
