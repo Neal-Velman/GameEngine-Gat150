@@ -18,8 +18,6 @@ int main() {
     nu::SetWorkingDirectory("Assets");
     // KEEP AT DA TOP!!!!!!!!!!!!!!!!!!!!!
 
-
-
     // INITIALIZATION
     nu::Engine::Get().Initialize();
 

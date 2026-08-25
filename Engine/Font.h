@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "Resource.h"
+#include "Resources/Resource.h"
 
 struct TTF_Font;
 namespace nu {

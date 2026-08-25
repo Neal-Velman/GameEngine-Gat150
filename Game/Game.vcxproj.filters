@@ -66,4 +66,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Build\Assets\Animations\batIdle.json">
+      <Filter>Assets\Animations</Filter>
+    </None>
+    <None Include="..\Build\Assets\Data\scene.json">
+      <Filter>Assets\Scenes</Filter>
+    </None>
+  </ItemGroup>
 </Project>

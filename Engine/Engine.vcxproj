@@ -173,11 +173,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
-    <ClInclude Include="Audio.h" />
+    <ClInclude Include="Audio\Audio.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Components\CircleColliderComponent.h" />
     <ClInclude Include="Components\ColliderComponent.h" />
+    <ClInclude Include="Components\PhysicsComponent.h" />
     <ClInclude Include="Components\RendererComponent.h" />
+    <ClInclude Include="Components\RigidBodyPhysicsComponent.h" />
+    <ClInclude Include="Components\SpriteAnimationRendererComponent.h" />
     <ClInclude Include="Components\SpriteRendererComponent.h" />
     <ClInclude Include="Factory.h" />
     <ClInclude Include="File.h" />
@@ -186,8 +189,7 @@
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameTime.h" />
-    <ClInclude Include="Input.h" />
-    <ClInclude Include="Json.h" />
+    <ClInclude Include="Input\Input.h" />
     <ClInclude Include="Math\MathUtils.h" />
     <ClInclude Include="Math\Rect.h" />
     <ClInclude Include="Math\Transform.h" />
@@ -198,13 +200,14 @@
     <ClInclude Include="Object.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Physics.h" />
+    <ClInclude Include="Physics\Physics.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Renderer\TextureFrames.h" />
-    <ClInclude Include="Resource.h" />
-    <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="Resources\Resource.h" />
+    <ClInclude Include="Resources\ResourceManager.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="Serialization\Json.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="StringUtils.h" />
     <ClInclude Include="Text.h" />
@@ -212,16 +215,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
-    <ClCompile Include="Audio.cpp" />
+    <ClCompile Include="Audio\Audio.cpp" />
     <ClCompile Include="Components\CircleColliderComponent.cpp" />
+    <ClCompile Include="Components\PhysicsComponent.cpp" />
+    <ClCompile Include="Components\RigidBodyPhysicsComponent.cpp" />
+    <ClCompile Include="Components\SpriteAnimationRendererComponent.cpp" />
     <ClCompile Include="Components\SpriteRendererComponent.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="File.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameTime.cpp" />
-    <ClCompile Include="Input.cpp" />
-    <ClCompile Include="Json.cpp" />
+    <ClCompile Include="Input\Input.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
@@ -231,10 +236,11 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Physics.cpp" />
+    <ClCompile Include="Physics\Physics.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Renderer\TextureFrames.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="Serialization\Json.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="Texture.cpp" />
   </ItemGroup>

@@ -5,22 +5,22 @@
 #include "Math/Transform.h"
 #include "Text.h"
 #include "Texture.h"
-#include "ResourceManager.h"
-#include "Json.h"
+#include "Resources/ResourceManager.h"
+#include "Serialization/Json.h"
 #include "StringUtils.h"
 #include "Factory.h"
-#include "Physics.h"
+#include "Physics/Physics.h"
 
 // Systems
 #include "Renderer.h"
-#include "Input.h"
+#include "Input/Input.h"
 #include "GameTime.h"
 #include "Actor.h"
 #include "Scene.h"
 #include "File.h"
 #include "Game.h"
 #include "ParticleSystem.h"
-#include "Audio.h"
+#include "Audio/Audio.h"
 
 #include <iostream>
 #include <vector>

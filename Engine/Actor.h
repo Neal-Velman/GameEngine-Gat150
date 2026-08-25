@@ -1,7 +1,7 @@
 #pragma once
 #include "Math/Transform.h"
 #include "Model.h"
-#include "Resource.h"
+#include "Resources/Resource.h"
 #include "Object.h"
 #include "Component.h"
 #include <string>

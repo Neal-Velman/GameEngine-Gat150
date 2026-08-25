@@ -2,7 +2,7 @@
 #include "SpriteRendererComponent.h"
 #include "Renderer.h"
 #include "Actor.h"
-#include "ResourceManager.h"
+#include "Resources/ResourceManager.h"
 #include "Engine.h"
 
 namespace nu {
