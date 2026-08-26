@@ -28,13 +28,16 @@ namespace nu {
     public:
         Actor() = default;
         Actor(const ActorDesc& ActorDesc) : m_tag{ ActorDesc.tag }, m_transform{ ActorDesc.transform },
-            m_velocity{ ActorDesc.velocity }, m_damping{ ActorDesc.damping }, m_lifespan{ ActorDesc.lifespan } {}
+            m_lifespan{ ActorDesc.lifespan } {}
         Actor(const Actor& other);
 
         CLASS_PROTOTYPE(Actor)
 
         virtual void Update(float dt);
         virtual void Draw(const class Renderer& renderer) const;
+
+        virtual void Start();
+        virtual void OnDestroy();
 
         virtual void OnCollision(Actor* other) {}
 
@@ -49,11 +52,6 @@ namespace nu {
 
         void SetScale(float scale) { m_transform.scale = scale; }
         const Vector2 GetScale() const { return m_transform.scale; }
-
-        const Vector2& GetVelocity() { return m_velocity; }
-        void SetVelocity(const Vector2& velocity) { m_velocity = velocity; }
-        void AddVelocity(const Vector2& velocity) { m_velocity += velocity; }
-
 
         const std::string& GetName() const { return m_name; }
 
@@ -80,8 +78,6 @@ namespace nu {
         std::string m_tag;
 
         Transform m_transform;
-        Vector2 m_velocity{ 0, 0 };
-        float m_damping{ 0.0f };
         float m_lifespan { 0.0f };
         bool m_destroyed { false };
 

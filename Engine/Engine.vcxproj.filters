@@ -165,6 +165,12 @@
     <ClInclude Include="Renderer\Font.h">
       <Filter>Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="Physics\PhysicsBody.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Box2DPhysicsComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -238,6 +244,12 @@
     </ClCompile>
     <ClCompile Include="Renderer\Mesh.cpp">
       <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\PhysicsBody.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Box2DPhysicsComponent.cpp">
+      <Filter>Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

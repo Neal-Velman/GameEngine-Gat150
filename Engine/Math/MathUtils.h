@@ -8,6 +8,7 @@ namespace nu::math {
 
 	constexpr float RadToDeg = 180.0f / Pi;
 	constexpr float DegToRad = Pi / 180.0f;
+
 	template<typename T>
 	T Wrap(T min, T max, T value) {
 		if (value > max) value = min;

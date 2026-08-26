@@ -4,18 +4,24 @@
 #include "Player.h"
 #include "Particle.h"
 #include "SpaceGame.h"
+#include "Components/PhysicsComponent.h"
 
     FACTORY_REGISTER(Enemy)
 void Enemy::Update(float dt) {
     Player* player = m_scene->GetActorByName<Player>("PlayerPrototype");
 
     if (player) {
-        nu::Vector2 direction = player->GetTransform().position - m_transform.position;
-        float rotation = direction.Angle();
-        SetRotation(rotation * 180.0f / 3.1415926535897932384626433832795f);
-        nu::Vector2 forward { 1,0 };
-        forward = forward.Rotate(m_transform.rotation * (3.1415926535897932384626433832795f / 180.0f));
-        AddVelocity(forward * m_speed * dt);
+        auto physicsComponent = GetComponent<nu::PhysicsComponent>();
+        if (physicsComponent) {
+            nu::Vector2 forward{ 1, 0 };
+            nu::Vector2 force = forward.Rotate(m_transform.rotation * 3.1415926535897932384626433832795f / 180.0f) * m_speed;
+
+            physicsComponent->ApplyForce(force);
+
+            nu::Vector2 direction = player->GetTransform().position - m_transform.position;
+            float rotation = direction.Angle();
+            physicsComponent->SetRotation(rotation * 180.0f / 3.1415926535897932384626433832795f);
+        }
     }
 
     float thrust = 0.0f;
@@ -23,7 +29,7 @@ void Enemy::Update(float dt) {
 
     nu::Vector2 forward{ 1, 0 };
     nu::Vector2 velocity = forward.Rotate(m_transform.rotation * 3.1415926535897932384626433832795f / 180.0f) * thrust;
-    AddVelocity(velocity * dt);
+    //AddVelocity(velocity * dt);
 
     Actor::Update(dt);
 

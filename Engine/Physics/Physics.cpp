@@ -2,9 +2,12 @@
 #include "Physics.h"
 
 namespace nu {
+
+	float Physics::m_pixelsPerUnit = 48.0f;
+
 	bool Physics::Initialize() {
 		b2WorldDef worldDef = b2DefaultWorldDef();
-		worldDef.gravity = b2Vec2{ 0.0f, -10.0f };
+		worldDef.gravity = b2Vec2{ 0.0f, 10.0f };
 		m_worldId = b2CreateWorld(&worldDef);
 
 		return true;
