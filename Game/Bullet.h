@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Actor.h"
+#include "Framework/Actor.h"
 
 struct BulletDesc : public nu::ActorDesc {
 	float speed { 0.0f };

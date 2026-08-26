@@ -1,5 +1,5 @@
 #pragma once
-#include "Actor.h"
+#include "Framework/Actor.h"
 
 struct PlayerDesc : public nu::ActorDesc {
 	float speed { 0.0f };

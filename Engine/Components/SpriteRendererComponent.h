@@ -1,7 +1,7 @@
 #pragma once
 #include "RendererComponent.h"
 #include "Resources/Resource.h"
-#include "Texture.h"
+#include "Renderer/Texture.h"
 namespace nu {
 	class SpriteRendererComponent : public RendererComponent {
 	public:

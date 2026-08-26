@@ -13,6 +13,8 @@
 #include <random>
 #include <fstream>
 
+// 2 RENDERER, 2 TEXTURE, 2 TEXT, 2 FONT, 2 MESH, 2 MODEL, 2 PARTICLE SYSTEM
+
 int main() {
     // KEEP AT DA TOP!!!!!!!!!!!!!!!!!!!!!
     nu::SetWorkingDirectory("Assets");

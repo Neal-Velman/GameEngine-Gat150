@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "RigidBodyPhysicsComponent.h"
-#include "Factory.h"
-#include "Actor.h"
+#include "Core/Factory.h"
+#include "Framework/Actor.h"
 
 namespace nu {
 
