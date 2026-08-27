@@ -20,7 +20,14 @@ void Enemy::Update(float dt) {
 
             nu::Vector2 direction = player->GetTransform().position - m_transform.position;
             float rotation = direction.Angle();
-            physicsComponent->SetRotation(rotation * 180.0f / 3.1415926535897932384626433832795f);
+            physicsComponent->SetRotation(rotation /** nu::math::RadToDeg*/);
+
+            nu::Vector2 position = physicsComponent->GetPosition();
+
+            position.x = nu::math::Wrap(0.0f, 1920.0f, position.x);
+            position.y = nu::math::Wrap(0.0f, 1024.0f, position.y);
+
+            physicsComponent->SetPosition(position);
         }
     }
 
