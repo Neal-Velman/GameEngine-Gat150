@@ -19,8 +19,11 @@ namespace nu {
 		bool Load(const std::string& filename, class Renderer& renderer);
 		const std::vector<Layer>& GetLayers() const { return m_layers; }
 
-		Rect GetTileRect(const Layer& layer, int tileId);
-		//Vector2 GetTilePosition(const Layer& layer, int tileIndex);
+		Rect GetTileRect (const Layer& layer, int tileId);
+		Vector2 GetTilePosition (const Layer& layer, int tileIndex);
+
+		int GetTileWidth() { return m_tileWidth; }
+		int GetTileHeight() { return m_tileHeight; }
 
 	private:
 		int m_tileWidth{ 0 };

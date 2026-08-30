@@ -20,8 +20,7 @@ namespace nu {
 		JSON_READ_NAME_REQ(document, "tileheight", m_tileHeight);
 
 		// read tilemap layers
-		if (JSON_HAS_NAME(document, "layers"))
-		{
+		if (JSON_HAS_NAME(document, "layers")) {
 			for (auto& layerValue : JSON_GET_NAME(document, "layers").GetArray())
 			{
 				Layer layer;
@@ -52,7 +51,6 @@ namespace nu {
 						}
 					}
 				}
-
 				m_layers.push_back(layer);
 			}
 		}
@@ -76,7 +74,10 @@ namespace nu {
 		};
 	}
 
-	/*Vector2 Tilemap::GetTilePosition(const Layer& layer, int tileIndex) {
-		return Vector2();
-	}*/
+	Vector2 Tilemap::GetTilePosition(const Layer& layer, int tileIndex) {
+		int column = tileIndex % layer.width;
+		int row = tileIndex / layer.width;
+
+		return Vector2{ (float)(column * GetTileWidth()), (float)(row * GetTileHeight()) };
+	}
 }

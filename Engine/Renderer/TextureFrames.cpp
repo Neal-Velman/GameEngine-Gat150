@@ -48,8 +48,8 @@ namespace nu {
 			frame = 0;
 		}
 		int currentFrame = m_startFrame + frame;
-		float column = currentFrame % m_numColumns;
-		float row = currentFrame / m_numColumns;
+		float column = (float) (currentFrame % m_numColumns);
+		float row = (float) (currentFrame / m_numColumns);
 
 		float x = column * m_frameSize.x;
 		float y = row * m_frameSize.y;
