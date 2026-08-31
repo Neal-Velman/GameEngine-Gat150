@@ -171,11 +171,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Build\Assets\Animations\batIdle.json" />
-    <None Include="..\Build\Assets\Data\scene.json" />
-    <None Include="..\Build\Assets\Tilemaps\world.json" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="SpaceGame\Assets.h" />
     <ClInclude Include="SpaceGame\Bullet.h" />
     <ClInclude Include="SpaceGame\Enemy.h" />
@@ -183,6 +178,14 @@
     <ClInclude Include="SpaceGame\Player.h" />
     <ClInclude Include="SpaceGame\SpaceGame.h" />
     <ClInclude Include="SpriteGame\SpriteGame.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Build\Assets\SpaceGame\Animations\batIdle.json" />
+    <None Include="..\Build\Assets\SpaceGame\Data\scene.json" />
+    <None Include="..\Build\Assets\SpaceGame\Tilemaps\world.json" />
+    <None Include="..\Build\Assets\SpriteGame\Animations\batIdle.json" />
+    <None Include="..\Build\Assets\SpriteGame\Data\scene.json" />
+    <None Include="..\Build\Assets\SpriteGame\Tilemaps\world.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

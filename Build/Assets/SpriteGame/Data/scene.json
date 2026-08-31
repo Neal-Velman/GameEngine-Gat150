@@ -15,7 +15,7 @@
       "components": [
         {
           "type": "TilemapRendererComponent",
-          "tilemap_name": "tilemaps/world.json"
+          "tilemap_name": "Tilemaps/world.json"
         }
       ]
     },

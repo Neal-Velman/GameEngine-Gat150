@@ -33,10 +33,22 @@
       },
       "components": [
         {
-          "type": "SpriteAnimationRendererComponent",
-          "texture_frames": "Animations/batIdle.json",
-          "frames_per_second": 10,
-          "loop": true
+          "type": "SpriteAnimatorRendererComponent",
+          "default_animation": "run",
+          "animations": [
+            {
+              "name": "run",
+              "texture_frames": "Animations/batIdle.json",
+              "frames_per_second": 10,
+              "loop": true
+            },
+            {
+              "name": "idle",
+              "texture_frames": "Animations/batIdle.json",
+              "frames_per_second": 10,
+              "loop": true
+            }
+          ]
         }
       ]
     },

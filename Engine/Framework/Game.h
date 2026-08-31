@@ -16,7 +16,7 @@ namespace nu {
 		virtual void Update(float dt);
 		virtual void Draw(class Renderer& renderer);
 
-		void SetScene(std::unique_ptr<Scene> scene) { m_scene = std::move(scene); }
+		void SetScene(std::unique_ptr<Scene> scene);
 
 	protected:
 		//Scene* m_scene = nullptr;

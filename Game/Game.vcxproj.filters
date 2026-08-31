@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
     <Filter Include="Header Files">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
@@ -16,32 +12,36 @@
     <Filter Include="Assets">
       <UniqueIdentifier>{f9e910ec-10f8-4b6b-9503-0186a647d850}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Assets\Animations">
-      <UniqueIdentifier>{3cf4ceea-605b-4488-a81a-fa6d644bd0dd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Assets\Scenes">
-      <UniqueIdentifier>{a7f4298d-c17d-4e2e-ad88-1f982f340cf2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Assets\Tilemaps">
-      <UniqueIdentifier>{757f0647-e339-4a00-ae9a-0b825d4f2713}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SpaceGame">
       <UniqueIdentifier>{4c116cda-be61-4082-a9db-30ae73264d06}</UniqueIdentifier>
     </Filter>
     <Filter Include="SpriteGame">
       <UniqueIdentifier>{f4d01a05-35e8-46bf-9443-6749da827ad6}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\Build\Assets\Animations\batIdle.json">
-      <Filter>Assets\Animations</Filter>
-    </None>
-    <None Include="..\Build\Assets\Data\scene.json">
-      <Filter>Assets\Scenes</Filter>
-    </None>
-    <None Include="..\Build\Assets\Tilemaps\world.json">
-      <Filter>Assets\Tilemaps</Filter>
-    </None>
+    <Filter Include="Assets\SpaceGame">
+      <UniqueIdentifier>{3cf4ceea-605b-4488-a81a-fa6d644bd0dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\SpriteGame">
+      <UniqueIdentifier>{fa6d742f-9eef-443b-874f-25486923931d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\SpaceGame\Animations">
+      <UniqueIdentifier>{f1dc0578-6859-4021-9b0d-35b56bd073d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\SpaceGame\Scenes">
+      <UniqueIdentifier>{98348133-db51-470f-baef-0e54eb83a666}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\SpaceGame\Tilemaps">
+      <UniqueIdentifier>{6a9ed326-8aae-4a95-b71b-e5d59cc65c79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\SpriteGame\Animations">
+      <UniqueIdentifier>{1c31faf8-cc63-48d1-87b4-5ffc5d384674}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\SpriteGame\Scenes">
+      <UniqueIdentifier>{8f5fa8a4-4cfa-4d66-908a-be4b9262c4ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\SpriteGame\Tilemaps">
+      <UniqueIdentifier>{e98bce8a-c05d-4431-8bc1-287b3218ac6e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
@@ -89,5 +89,25 @@
     <ClInclude Include="SpriteGame\SpriteGame.h">
       <Filter>SpriteGame</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Build\Assets\SpriteGame\Data\scene.json">
+      <Filter>Assets\SpriteGame\Scenes</Filter>
+    </None>
+    <None Include="..\Build\Assets\SpriteGame\Tilemaps\world.json">
+      <Filter>Assets\SpriteGame\Tilemaps</Filter>
+    </None>
+    <None Include="..\Build\Assets\SpriteGame\Animations\batIdle.json">
+      <Filter>Assets\SpriteGame\Animations</Filter>
+    </None>
+    <None Include="..\Build\Assets\SpaceGame\Data\scene.json">
+      <Filter>Assets\SpaceGame\Scenes</Filter>
+    </None>
+    <None Include="..\Build\Assets\SpaceGame\Tilemaps\world.json">
+      <Filter>Assets\SpaceGame\Tilemaps</Filter>
+    </None>
+    <None Include="..\Build\Assets\SpaceGame\Animations\batIdle.json">
+      <Filter>Assets\SpaceGame\Animations</Filter>
+    </None>
   </ItemGroup>
 </Project>

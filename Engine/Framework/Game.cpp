@@ -14,4 +14,8 @@ namespace nu {
 		m_scene->Draw(renderer);
 	}
 
+	void Game::SetScene(std::unique_ptr<Scene> scene) {
+		m_scene = std::move(scene);
+	}
+
 }

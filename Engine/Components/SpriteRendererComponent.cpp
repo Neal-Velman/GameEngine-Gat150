@@ -9,13 +9,33 @@ namespace nu {
 
 	FACTORY_REGISTER(SpriteRendererComponent)
 
+	void SpriteRendererComponent::Start() {
+		if (!m_textureName.empty()) {
+			m_texture = Resources().Get<Texture>(m_textureName, Engine::Get().GetRenderer());
+			if (m_texture) {
+				m_size = m_texture->GetSize();
+			}
+		}
+	}
+
 	void SpriteRendererComponent::Draw(const Renderer& renderer) {
 		if (m_texture) {
-			renderer.DrawTexture(*m_texture,
+			if (m_sourceRect.w > 0 && m_sourceRect.h > 0) {
+				renderer.DrawTexture(*m_texture, 
+					m_sourceRect,
+					GetOwner()->GetTransform().position.x,
+					GetOwner()->GetTransform().position.y,
+					GetOwner()->GetTransform().rotation,
+					GetOwner()->GetTransform().scale,
+					m_flipH);
+			} else {
+				renderer.DrawTexture(*m_texture,
 				GetOwner()->GetTransform().position.x,
 				GetOwner()->GetTransform().position.y,
 				GetOwner()->GetTransform().rotation,
-				GetOwner()->GetTransform().scale);
+				GetOwner()->GetTransform().scale,
+				m_flipH);
+			}
 		}
 	}
 
@@ -23,10 +43,7 @@ namespace nu {
 
 		RendererComponent::Read(value);
 
-		std::string textureName;
-		JSON_READ_NAME(value, "texture", textureName);
-		if (!textureName.empty()) {
-			m_texture = Resources().Get<Texture>(textureName, Engine::Get().GetRenderer());
-		}
+		JSON_READ_NAME(value, "texture", m_textureName);
+		JSON_READ_NAME(value, "flipH", m_flipH);
 	}
 }

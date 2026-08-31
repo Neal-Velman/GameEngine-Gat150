@@ -30,37 +30,37 @@ void SpriteGame::Update(float dt) {
         }
         break;
     case GameState::START_GAME:
-        m_score = 0;
+        /*m_score = 0;
         m_lives = 3;
         m_spawnTime = 5.0f;
-        m_stateTimer = 0.5f;
+        m_stateTimer = 0.5f;*/
         m_gameState = GameState::START_LEVEL;
         break;
     case GameState::START_LEVEL:
         m_scene->RemoveAllActors();
-        SpawnPlayer();
-        m_spawnTime = 5.0f;
+        /*SpawnPlayer();
+        m_spawnTime = 5.0f;*/
         m_gameState = GameState::GAME;
         break;
     case GameState::GAME:
-        m_spawnTimer -= dt;
-        if (m_spawnTimer <= 0.0f) {
-            m_spawnTimer = m_spawnTime;
-            SpawnEnemy();
-            // increase difficulty
-            m_spawnCount++;
-            if (m_spawnCount > 5 && m_spawnTime >= 1.0f) {
-                m_spawnCount = 0;
-                m_spawnTime -= 0.5f;
-            }
-        }
+        //m_spawnTimer -= dt;
+        //if (m_spawnTimer <= 0.0f) {
+        //    m_spawnTimer = m_spawnTime;
+        //    SpawnEnemy();
+        //    // increase difficulty
+        //    m_spawnCount++;
+        //    if (m_spawnCount > 5 && m_spawnTime >= 1.0f) {
+        //        m_spawnCount = 0;
+        //        m_spawnTime -= 0.5f;
+        //    }
+        //}
         break;
     case GameState::GAME_OVER:
-        m_stateTimer -= dt;
+       /* m_stateTimer -= dt;
         if (m_stateTimer <= 0) {
             m_scene->RemoveAllActors();
             m_gameState = GameState::TITLE;
-        }
+        }*/
         break;
     default:
         break;
@@ -80,12 +80,12 @@ void SpriteGame::Draw(nu::Renderer& renderer) {
     case GameState::START_LEVEL:
         break;
     case GameState::GAME:
-        m_scoreText->Create(renderer, "Score: " + std::to_string(m_score), { 1.0f, 1.0f, 1.0f });
+        /*m_scoreText->Create(renderer, "Score: " + std::to_string(m_score), { 1.0f, 1.0f, 1.0f });
         m_scoreText->Draw(renderer, 30, 30);
 
         m_livesText->Create(renderer, "Lives: " + std::to_string(m_lives), { 1.0f, 1.0f, 1.0f });
         m_livesText->Draw(renderer, (float)renderer.GetWidth() - 360, (float)30);
-        break;
+        break;*/
     case GameState::GAME_OVER:
         break;
     default:
