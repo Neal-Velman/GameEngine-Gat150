@@ -1,11 +1,13 @@
 #pragma once
+#include <memory>
 
 namespace nu {
 	class Scene;
 
 	class Game {
 	public:
-		Game() = default;
+		Game();
+		virtual ~Game();
 		Game(Scene* scene) : m_scene { scene } {}
 
 		virtual bool Initialize() { return true; }
@@ -14,10 +16,11 @@ namespace nu {
 		virtual void Update(float dt);
 		virtual void Draw(class Renderer& renderer);
 
-		void SetScene(Scene* scene) { m_scene = scene; }
+		void SetScene(std::unique_ptr<Scene> scene) { m_scene = std::move(scene); }
 
 	protected:
-		Scene* m_scene = nullptr;
+		//Scene* m_scene = nullptr;
+		std::unique_ptr<Scene> m_scene = std::make_unique<Scene>();
 	};
 
 }

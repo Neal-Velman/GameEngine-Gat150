@@ -1,14 +1,12 @@
-#include "SpaceGame.h"
+#include "SpriteGame.h"
 #include "Engine.h"
-#include "Player.h"
-#include "Enemy.h"
-#include "Assets.h"
 #include <memory>
 
-bool SpaceGame::Initialize() {
+bool SpriteGame::Initialize() {
+    nu::SetWorkingDirectory("SpriteGame");
     Game::Initialize();
 
-    m_scene = new nu::Scene();
+    auto m_scene = std::make_unique<nu::Scene>();
     m_scene->SetGame(this);
     m_scene->Load("Data/scene.json");
     m_gameState = GameState::TITLE;
@@ -24,7 +22,7 @@ bool SpaceGame::Initialize() {
 }
 
 using namespace nu;
-void SpaceGame::Update(float dt) {
+void SpriteGame::Update(float dt) {
     switch (m_gameState) {
     case GameState::TITLE:
         if (Engine::Get().GetInput().GetKeyPressed(SDL_SCANCODE_SPACE)) {
@@ -70,11 +68,11 @@ void SpaceGame::Update(float dt) {
     Game::Update(dt);
 }
 
-void SpaceGame::Draw(nu::Renderer& renderer) {
+void SpriteGame::Draw(nu::Renderer& renderer) {
     nu::Engine::Get().GetRenderer().DrawBackground(*nu::Resources().Get<nu::Texture>("Textures/Background.jpg", nu::Engine::Get().GetRenderer()), 30, 30, 0.0f, 30);
     switch (m_gameState) {
     case GameState::TITLE:
-        m_titleText->Create(nu::Engine::Get().GetRenderer(), "Totally Realistic Space Combat", nu::Color{ 1.0f, 1.0f, 1.0f });
+        m_titleText->Create(nu::Engine::Get().GetRenderer(), "Totally Realistic Sprite-Based Combat", nu::Color{ 1.0f, 1.0f, 1.0f });
         m_titleText->Draw(renderer, 400, 400);
         break;
     case GameState::START_GAME:
@@ -97,18 +95,18 @@ void SpaceGame::Draw(nu::Renderer& renderer) {
     Game::Draw(renderer);
 }
 
-void SpaceGame::OnPlayerDead() {
+void SpriteGame::OnPlayerDead() {
     m_lives--;
     m_gameState = (m_lives == 0) ? GameState::GAME_OVER : GameState::START_LEVEL;
 }
 
-void SpaceGame::SpawnPlayer() {
+void SpriteGame::SpawnPlayer() {
 
     auto actor = nu::Factory::Instance().Create<nu::Actor>("PlayerPrototype");
     m_scene->AddActor(std::move(actor));
 }
 
-void SpaceGame::SpawnEnemy() {
+void SpriteGame::SpawnEnemy() {
     int enemyIndex = nu::RandomInt(2);
     if (enemyIndex == 0) {
         auto actor = nu::Factory::Instance().Create<nu::Actor>("EnemyPrototype");

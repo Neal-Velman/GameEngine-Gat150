@@ -1,9 +1,11 @@
 #include "Engine.h"
-#include "Player.h"
-#include "Enemy.h"
-#include "Bullet.h"
-#include "Assets.h"
-#include "SpaceGame.h"
+#include "SpaceGame/Player.h"
+#include "SpaceGame/Enemy.h"
+#include "SpaceGame/Bullet.h"
+#include "SpaceGame/Assets.h"
+#include "SpaceGame/SpaceGame.h"
+
+#include "SpriteGame/SpriteGame.h"
 
 #include <iostream>
 #include <vector>
@@ -21,8 +23,9 @@ int main() {
     // INITIALIZATION
     nu::Engine::Get().Initialize();
 
-    SpaceGame game;
-    game.Initialize();
+    //SpaceGame game;
+    auto game = std::make_unique<SpriteGame>();
+    game->Initialize();
 
     // MAIN LOOP
     bool quit = false;
@@ -42,7 +45,7 @@ int main() {
         // UPDATE ENGINE
         nu::Engine::Get().Update();
         float dt = nu::Engine::Get().GetTime().GetDeltaTime();
-        game.Update(dt);
+        game->Update(dt);
 
         // RENDER
 
@@ -51,13 +54,13 @@ int main() {
         nu::Engine::Get().GetRenderer().Clear();
 
             // Game
-        game.Draw(nu::Engine::Get().GetRenderer());
+        game->Draw(nu::Engine::Get().GetRenderer());
 
             // Particle System
         nu::Engine::Get().GetPS().Draw(nu::Engine::Get().GetRenderer());
         nu::Engine::Get().GetRenderer().Present();
     }
-
+    game.reset();
     // SHUTDOWN
     nu::Engine::Get().Shutdown();
     

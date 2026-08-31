@@ -156,13 +156,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Assets.cpp" />
-    <ClCompile Include="Bullet.cpp" />
-    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Particle.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="SpaceGame.cpp" />
+    <ClCompile Include="SpaceGame\Assets.cpp" />
+    <ClCompile Include="SpaceGame\Bullet.cpp" />
+    <ClCompile Include="SpaceGame\Enemy.cpp" />
+    <ClCompile Include="SpaceGame\Particle.cpp" />
+    <ClCompile Include="SpaceGame\Player.cpp" />
+    <ClCompile Include="SpaceGame\SpaceGame.cpp" />
+    <ClCompile Include="SpriteGame\SpriteGame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Engine\Engine.vcxproj">
@@ -170,17 +171,18 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Assets.h" />
-    <ClInclude Include="Bullet.h" />
-    <ClInclude Include="Enemy.h" />
-    <ClInclude Include="Particle.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="SpaceGame.h" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="..\Build\Assets\Animations\batIdle.json" />
     <None Include="..\Build\Assets\Data\scene.json" />
     <None Include="..\Build\Assets\Tilemaps\world.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SpaceGame\Assets.h" />
+    <ClInclude Include="SpaceGame\Bullet.h" />
+    <ClInclude Include="SpaceGame\Enemy.h" />
+    <ClInclude Include="SpaceGame\Particle.h" />
+    <ClInclude Include="SpaceGame\Player.h" />
+    <ClInclude Include="SpaceGame\SpaceGame.h" />
+    <ClInclude Include="SpriteGame\SpriteGame.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
