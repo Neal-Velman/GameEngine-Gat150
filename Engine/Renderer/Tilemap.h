@@ -1,6 +1,7 @@
 #pragma once
 #include "Resources/ResourceManager.h"
 #include "Math/Rect.h"
+#include "Math/Vector2.h"
 #include <vector>
 namespace nu {
 
@@ -22,8 +23,8 @@ namespace nu {
 		Rect GetTileRect (const Layer& layer, int tileId);
 		Vector2 GetTilePosition (const Layer& layer, int tileIndex);
 
-		int GetTileWidth() { return m_tileWidth; }
-		int GetTileHeight() { return m_tileHeight; }
+		int GetTileWidth() const { return m_tileWidth; }
+		int GetTileHeight() const { return m_tileHeight; }
 
 	private:
 		int m_tileWidth{ 0 };
