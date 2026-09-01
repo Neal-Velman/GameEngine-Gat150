@@ -2,28 +2,9 @@
   "actors": [
     {
       "type": "Actor",
-      "prototype": false,
-      "name": "Tilemap",
-      "tag": "Ground",
-      "active": true,
-      "persistent": true,
-      "transform": {
-        "position": [ 0, 0 ],
-        "rotation": 0,
-        "scale": 5
-      },
-      "components": [
-        {
-          "type": "TilemapRendererComponent",
-          "tilemap_name": "Tilemaps/world.json"
-        }
-      ]
-    },
-    {
-      "type": "Actor",
-      "prototype": false,
+      "prototype": true,
       "name": "Bat",
-      "tag": "Enemy",
+      "tag": "BatPrototype",
       "active": true,
       "persistent": true,
       "transform": {
@@ -41,7 +22,7 @@
       ]
     },
     {
-      "type": "Player",
+      "type": "PlayerController",
       "prototype": true,
       "name": "PlayerPrototype",
       "tag": "Player",
@@ -50,75 +31,115 @@
       "transform": {
         "position": [ 860, 512 ],
         "rotation": 0,
-        "scale": 1
+        "scale": 3
       },
       "components": [
         {
-          "type": "SpriteRendererComponent",
-          "texture": "Textures/player.png"
+          "type": "SpriteAnimatorRendererComponent",
+          "default_animation": "run",
+          "animations": [
+            {
+              "name": "run",
+              "texture_frames": "Animations/batIdle.json",
+              "frames_per_second": 10,
+              "loop": true
+            },
+            {
+              "name": "idle",
+              "texture_frames": "Animations/batIdle.json",
+              "frames_per_second": 10,
+              "loop": true
+            }
+          ]
         },
         {
           "type": "Box2DPhysicsComponent",
           "linear_damping": 1.25,
           "angular_damping": 1.25,
-          "size": [ 48, 48 ],
-          "gravity_scale": 0
+          "size": [ 32, 32 ],
+          "constrain-angle": true,
+          "gravity_scale": 1
         }
       ]
     },
     {
-      "type": "Enemy",
+      "type": "EnemyController",
       "prototype": true,
       "name": "EnemyPrototype",
       "tag": "Enemy",
       "active": true,
       "speed": 400,
-      "points": 100,
-      "health": 1,
-      "damping": 1.5,
       "transform": {
         "position": [ 860, 512 ],
         "rotation": 0,
-        "scale": 1
+        "scale": 3
       },
       "components": [
         {
-          "type": "SpriteRendererComponent",
-          "texture": "Textures/enemy.png"
+          "type": "SpriteAnimatorRendererComponent",
+          "default_animation": "run",
+          "animations": [
+            {
+              "name": "run",
+              "texture_frames": "Animations/batIdle.json",
+              "frames_per_second": 10,
+              "loop": true
+            },
+            {
+              "name": "idle",
+              "texture_frames": "Animations/batIdle.json",
+              "frames_per_second": 10,
+              "loop": true
+            }
+          ]
         },
         {
           "type": "Box2DPhysicsComponent",
           "linear_damping": 1.25,
           "angular_damping": 1.25,
-          "size": [ 48, 48 ],
-          "gravity_scale": 0
+          "size": [ 128, 32 ],
+          "constrain-angle": true,
+          "gravity_scale": 1
         }
       ]
     },
     {
-      "type": "Bullet",
+      "type": "FlyingEnemyController",
       "prototype": true,
-      "name": "BulletPrototype",
-      "tag": "PlayerBullet",
+      "name": "FlyingEnemyPrototype",
+      "tag": "Enemy",
       "active": true,
-      "lifespan": 3,
       "speed": 400,
-      "damping": 1.5,
       "transform": {
         "position": [ 860, 512 ],
         "rotation": 0,
-        "scale": 1
+        "scale": 3
       },
       "components": [
         {
-          "type": "SpriteRendererComponent",
-          "texture": "Textures/bullet.png"
+          "type": "SpriteAnimatorRendererComponent",
+          "default_animation": "run",
+          "animations": [
+            {
+              "name": "run",
+              "texture_frames": "Animations/batIdle.json",
+              "frames_per_second": 10,
+              "loop": true
+            },
+            {
+              "name": "idle",
+              "texture_frames": "Animations/batIdle.json",
+              "frames_per_second": 10,
+              "loop": true
+            }
+          ]
         },
         {
           "type": "Box2DPhysicsComponent",
           "linear_damping": 1.25,
           "angular_damping": 1.25,
-          "size": [ 48, 48 ],
+          "size": [ 128, 32 ],
+          "constrain-angle": true,
           "gravity_scale": 0,
           "is_sensor": true
         }

@@ -16,8 +16,8 @@ void Player::Update(float dt) {
     if (nu::Engine::Get().GetInput().GetKeyDown(SDL_SCANCODE_S)) thrust = -m_speed;
 
     float rotate = 0.0f;
-    if (nu::Engine::Get().GetInput().GetKeyDown(SDL_SCANCODE_A)) rotate = -100.0f;
-    if (nu::Engine::Get().GetInput().GetKeyDown(SDL_SCANCODE_D)) rotate = +100.0f;
+    if (nu::Engine::Get().GetInput().GetKeyDown(SDL_SCANCODE_A)) rotate = -70.0f;
+    if (nu::Engine::Get().GetInput().GetKeyDown(SDL_SCANCODE_D)) rotate = +70.0f;
 
 
 
@@ -30,10 +30,10 @@ void Player::Update(float dt) {
 
         nu::Vector2 position = physicsComponent->GetPosition();
 
-        position.x = nu::math::Wrap(0.0f, 1920.0f, position.x);
-        position.y = nu::math::Wrap(0.0f, 1024.0f, position.y);
-
-        physicsComponent->SetPosition(position);
+        //position.x = nu::math::Wrap(0.0f, 1920.0f, position.x);
+        //position.y = nu::math::Wrap(0.0f, 1024.0f, position.y);
+        //physicsComponent->SetPosition(position);
+        nu::Engine::Get().GetRenderer().SetCamera(position);
     }
 
     // fire

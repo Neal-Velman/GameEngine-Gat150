@@ -6,7 +6,7 @@ bool SpriteGame::Initialize() {
     nu::SetWorkingDirectory("SpriteGame");
     Game::Initialize();
 
-    auto m_scene = std::make_unique<nu::Scene>();
+    m_scene = std::make_unique<nu::Scene>();
     m_scene->SetGame(this);
     m_scene->Load("Data/scene.json");
     m_gameState = GameState::TITLE;
@@ -38,22 +38,23 @@ void SpriteGame::Update(float dt) {
         break;
     case GameState::START_LEVEL:
         m_scene->RemoveAllActors();
-        /*SpawnPlayer();
-        m_spawnTime = 5.0f;*/
+        SpawnPlayer();
+        m_scene->Load("Data/level.json");
+        //m_spawnTime = 5.0f;
         m_gameState = GameState::GAME;
         break;
     case GameState::GAME:
-        //m_spawnTimer -= dt;
-        //if (m_spawnTimer <= 0.0f) {
-        //    m_spawnTimer = m_spawnTime;
-        //    SpawnEnemy();
-        //    // increase difficulty
-        //    m_spawnCount++;
-        //    if (m_spawnCount > 5 && m_spawnTime >= 1.0f) {
-        //        m_spawnCount = 0;
-        //        m_spawnTime -= 0.5f;
-        //    }
-        //}
+        m_spawnTimer -= dt;
+        if (m_spawnTimer <= 0.0f) {
+            m_spawnTimer = m_spawnTime;
+            SpawnEnemy();
+            // increase difficulty
+            m_spawnCount++;
+            if (m_spawnCount > 5 && m_spawnTime >= 1.0f) {
+                m_spawnCount = 0;
+                m_spawnTime -= 0.5f;
+            }
+        }
         break;
     case GameState::GAME_OVER:
        /* m_stateTimer -= dt;
@@ -69,6 +70,7 @@ void SpriteGame::Update(float dt) {
 }
 
 void SpriteGame::Draw(nu::Renderer& renderer) {
+	renderer.EnableCamera(false);
     nu::Engine::Get().GetRenderer().DrawBackground(*nu::Resources().Get<nu::Texture>("Textures/Background.jpg", nu::Engine::Get().GetRenderer()), 30, 30, 0.0f, 30);
     switch (m_gameState) {
     case GameState::TITLE:
@@ -91,7 +93,7 @@ void SpriteGame::Draw(nu::Renderer& renderer) {
     default:
         break;
     }
-
+    renderer.EnableCamera();
     Game::Draw(renderer);
 }
 
@@ -114,8 +116,8 @@ void SpriteGame::SpawnEnemy() {
         m_scene->AddActor(std::move(actor));
     }
     else if (enemyIndex == 1) {
-        auto actor = nu::Factory::Instance().Create<nu::Actor>("Enemy2Prototype");
+        auto actor = nu::Factory::Instance().Create<nu::Actor>("FlyingEnemyPrototype");
         actor->SetPosition(nu::Vector2{ nu::RandomFloat(1024.0f), nu::RandomFloat(800.0f) });
         m_scene->AddActor(std::move(actor));
-    }     
+    }  
 }

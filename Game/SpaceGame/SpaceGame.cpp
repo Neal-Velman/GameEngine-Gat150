@@ -9,7 +9,7 @@ bool SpaceGame::Initialize() {
     nu::SetWorkingDirectory("SpaceGame");
     Game::Initialize();
 
-    auto m_scene = std::make_unique<nu::Scene>();
+    m_scene = std::make_unique<nu::Scene>();
     m_scene->SetGame(this);
     m_scene->Load("Data/scene.json");
     m_gameState = GameState::TITLE;
