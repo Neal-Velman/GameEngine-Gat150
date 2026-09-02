@@ -3,12 +3,14 @@
 #include "Components/SpriteAnimatorRendererComponent.h"
 #include "Engine.h"
 #include "Core/Factory.h"
+#include "Framework/Scene.h"
+#include "Damager.h"
 
 FACTORY_REGISTER(PlayerController)
 
 void PlayerController::Start() {
 
-	Actor::Start();
+	CharacterBase::Start();
 
 	m_physicsComponent = GetComponent<nu::PhysicsComponent>();
 	assert(m_physicsComponent);
@@ -18,31 +20,75 @@ void PlayerController::Start() {
 
 void PlayerController::Update(float dt) {
 	nu::Vector2 velocity = m_physicsComponent->GetVelocity();
-	float dir = 0.0f;
-	if (nu::Engine::Get().GetInput().GetKeyDown(SDL_SCANCODE_A)) dir = -1.0f;
-	if (nu::Engine::Get().GetInput().GetKeyDown(SDL_SCANCODE_D)) dir = +1.0f;
-	if (nu::Engine::Get().GetInput().GetKeyPressed(SDL_SCANCODE_SPACE)) {
-		velocity.y = -250.0f;
-	}
 
-	if (dir != 0.0f) {
-		velocity.x = dir * 100.0f;
-		m_rendererComponent->Play("run");
-	} else {
-		m_rendererComponent->Play("idle");
+	switch (m_state) {
+	case CharacterBase::State::MOVE:
+	{
+		float dir = 0.0f;
+		if (nu::Engine::Get().GetInput().GetKeyDown(SDL_SCANCODE_A)) dir = -1.0f;
+		if (nu::Engine::Get().GetInput().GetKeyDown(SDL_SCANCODE_D)) dir = +1.0f;
+		if (nu::Engine::Get().GetInput().GetKeyPressed(SDL_SCANCODE_SPACE)) {
+			velocity.y = -250.0f;
+		}
+
+		if (dir != 0.0f) {
+			velocity.x = dir * 100.0f;
+			m_rendererComponent->Play("run");
+			m_rendererComponent->SetFlipH(dir < 0.0f);
+		}
+		else {
+			m_rendererComponent->Play("idle");
+		}
+
+		if (nu::Engine::Get().GetInput().GetKeyDown(SDL_SCANCODE_RSHIFT)) {
+			m_state = State::ATTACK;
+			m_rendererComponent->Play("attack");
+
+			auto damager = nu::Factory::Instance().Create<nu::Actor>("DamagerPrototype");
+			damager->SetPosition(GetTransform().position + nu::Vector2{(m_rendererComponent->GetFlipH()) ? -50.0f : 50.0f, 20.0f});
+			damager->SetTag("PlayerDamager");
+			m_scene->AddActor(std::move(damager));
+		}
 	}
-	m_rendererComponent->SetFlipH(dir < 0.0f);
+		break;
+	case CharacterBase::State::ATTACK:
+	{
+
+		if (m_rendererComponent->IsAnimationDone()) {
+			m_state = State::MOVE;
+			m_rendererComponent->Play("idle");
+		}
+	}
+		break;
+	case CharacterBase::State::HIT:
+		break;
+	case CharacterBase::State::DEATH:
+		break;
+	default:
+		break;
+	}
 
 	m_physicsComponent->SetVelocity(velocity);
 	nu::Engine::Get().GetRenderer().SetCamera(m_physicsComponent->GetPosition());
-	Actor::Update(dt);
+	CharacterBase::Update(dt);
 }
 
 void PlayerController::OnCollision(nu::Actor* other) {
-
+	if (other->GetTag() == "EnemyDamager") {
+		other->SetDestroyed();
+		m_state = State::HIT;
+		m_rendererComponent->Play("hit");
+		Damager* damager = dynamic_cast<Damager*>(other);
+		if (damager) {
+			m_health -= damager->GetDamage();
+		}
+		if (m_health <= 0) {
+			SetDestroyed();
+		}
+	}
 }
 
 void PlayerController::Read(const nu::json::value_t& value) {
-	Actor::Read(value);
+	CharacterBase::Read(value);
 }
 

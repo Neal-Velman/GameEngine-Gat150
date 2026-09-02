@@ -22,8 +22,8 @@ namespace nu {
 		void DrawLine(float x1, float y1, float x2, float y2) const;
 
 		void DrawModel(const class Model& model, const struct Transform& transform) const;
-		void DrawTexture(const class Texture& texture, float x, float y, float angle = 0.0f, float scale = 1.0f, bool flipH = false) const;
-		void DrawTexture(const class Texture& texture, const struct Rect& source, float x, float y, float angle = 0.0f, float scale = 1.0f, bool flipH = false) const;
+		void DrawTexture(const class Texture& texture, float x, float y, float angle = 0.0f, float scale = 1.0f, bool flipH = false, const Vector2& origin = Vector2{0.5f, 0.5f}) const;
+		void DrawTexture(const class Texture& texture, const struct Rect& source, float x, float y, float angle = 0.0f, float scale = 1.0f, bool flipH = false, const Vector2& origin = Vector2{ 0.5f, 0.5f }) const;
 
 		void DrawBackground(const class Texture& texture, float x, float y, float angle = 0.0f, float scale = 1.0f, bool flipH = false) const;
 

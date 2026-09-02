@@ -3,12 +3,13 @@
 #include "Components/SpriteAnimatorRendererComponent.h"
 #include "Engine.h"
 #include "Core/Factory.h"
+#include "Damager.h"
 
 FACTORY_REGISTER(EnemyController)
 
 void EnemyController::Start() {
 
-	Actor::Start();
+	CharacterBase::Start();
 
 	m_physicsComponent = GetComponent<nu::PhysicsComponent>();
 	assert(m_physicsComponent);
@@ -18,38 +19,98 @@ void EnemyController::Start() {
 
 void EnemyController::Update(float dt) {
 	nu::Vector2 velocity = m_physicsComponent->GetVelocity();
-	float dir = 0.0f;
-	auto player = m_scene->GetActorByName("PlayerPrototype");
 
-	if (player) {
-		nu::Vector2 position = GetTransform().position;
-		nu::Vector2 playerPosition = player->GetTransform().position;
+	switch (m_state) {
+	case CharacterBase::State::MOVE:
+	{
+		float dir = 0.0f;
+		auto player = m_scene->GetActorByName("PlayerPrototype");
 
-		if (playerPosition.x < position.x) {
-			dir = -1.0f; 
+		if (player) {
+			nu::Vector2 position = GetTransform().position;
+			nu::Vector2 playerPosition = player->GetTransform().position;
+			nu::Vector2 direction = playerPosition - position;
+
+
+			if (playerPosition.x < position.x) {
+				dir = -1.0f;
+			}
+			else {
+				dir = 1.0f;
+			}
+
+			m_rendererComponent->SetFlipH(direction.x < 0.0f);
+
+			if (direction.Length() < 100.0f) {
+				m_state = State::ATTACK;
+				m_rendererComponent->Play("AttacK");
+
+				auto damager = nu::Factory::Instance().Create<Damager>("DamagerPrototype");
+				damager->SetDamage(3.0f);
+				damager->SetPosition(GetTransform().position);
+				damager->SetScale(5.0f);
+				damager->SetTag("EnemyDamager");
+				m_scene->AddActor(std::move(damager));
+				m_hasAttacked = false;
+			}
+		}
+
+
+
+		if (dir != 0.0f) {
+			velocity.x = dir * 100.0f;
+			m_rendererComponent->Play("attack");
+			m_rendererComponent->SetFlipH(dir < 0.0f);
 		} else {
-			dir = 1.0f;
+			m_rendererComponent->Play("idle");
 		}
 	}
+		break;
+	case CharacterBase::State::ATTACK:
+		if (m_hasAttacked == false && m_rendererComponent->GetFrame() == 3) {
+			m_hasAttacked = true;
+			// Put damager code in here
+		}
 
-	if (dir != 0.0f) {
-		velocity.x = dir * 100.0f;
-		m_rendererComponent->Play("run");
+		if (m_rendererComponent->IsAnimationDone()) {
+			m_state = State::MOVE;
+			m_rendererComponent->Play("idle");
+		}
+		break;
+	case CharacterBase::State::HIT:
+		if (m_rendererComponent->IsAnimationDone()) {
+			m_state = State::MOVE;
+			m_rendererComponent->Play("idle");
+		}
+		break;
+	case CharacterBase::State::DEATH:
+		break;
+	default:
+		break;
 	}
-	else {
-		m_rendererComponent->Play("idle");
-	}
-	//m_rendererComponent->SetFlipH(dir < 0.0f);
+
+
 
 	m_physicsComponent->SetVelocity(velocity);
-	Actor::Update(dt);
+	CharacterBase::Update(dt);
 }
 
 void EnemyController::OnCollision(nu::Actor* other) {
-
+	if (other->GetTag() == "PlayerDamager") {
+		other->SetDestroyed();
+		m_state = State::HIT;
+		m_rendererComponent->Play("hit");
+		Damager* damager = dynamic_cast<Damager*>(other);
+		if (damager) {
+			m_health -= damager->GetDamage();
+		}
+		if (m_health <= 0) {
+			SetDestroyed();
+		}
+	}
 }
 
 void EnemyController::Read(const nu::json::value_t& value) {
-	Actor::Read(value);
+	CharacterBase::Read(value);
 }
 

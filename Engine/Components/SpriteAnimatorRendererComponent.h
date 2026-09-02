@@ -21,6 +21,10 @@ namespace nu {
 		bool GetPause() const { return m_pause; }
 		void SetPause(bool pause) { m_pause = pause; }
 
+		unsigned int GetFrame() const { return m_frame; }
+		bool IsAnimationDone() const;
+		const std::string& GetAnimationName() const { return m_spriteAnimation.name; }
+
 		void Read(const json::value_t& value) override;
 
 

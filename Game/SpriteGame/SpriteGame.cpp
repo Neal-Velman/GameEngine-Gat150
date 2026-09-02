@@ -71,7 +71,7 @@ void SpriteGame::Update(float dt) {
 
 void SpriteGame::Draw(nu::Renderer& renderer) {
 	renderer.EnableCamera(false);
-    nu::Engine::Get().GetRenderer().DrawBackground(*nu::Resources().Get<nu::Texture>("Textures/Background.jpg", nu::Engine::Get().GetRenderer()), 30, 30, 0.0f, 30);
+    nu::Engine::Get().GetRenderer().DrawBackground(*nu::Resources().Get<nu::Texture>("Textures/bg03.png", nu::Engine::Get().GetRenderer()), 30, 30, 0.0f, 30);
     switch (m_gameState) {
     case GameState::TITLE:
         m_titleText->Create(nu::Engine::Get().GetRenderer(), "Totally Realistic Sprite-Based Combat", nu::Color{ 1.0f, 1.0f, 1.0f });
@@ -82,12 +82,12 @@ void SpriteGame::Draw(nu::Renderer& renderer) {
     case GameState::START_LEVEL:
         break;
     case GameState::GAME:
-        /*m_scoreText->Create(renderer, "Score: " + std::to_string(m_score), { 1.0f, 1.0f, 1.0f });
+        m_scoreText->Create(renderer, "Score: " + std::to_string(m_score), { 1.0f, 1.0f, 1.0f });
         m_scoreText->Draw(renderer, 30, 30);
 
         m_livesText->Create(renderer, "Lives: " + std::to_string(m_lives), { 1.0f, 1.0f, 1.0f });
         m_livesText->Draw(renderer, (float)renderer.GetWidth() - 360, (float)30);
-        break;*/
+        break;
     case GameState::GAME_OVER:
         break;
     default:

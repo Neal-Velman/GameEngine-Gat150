@@ -163,6 +163,8 @@
     <ClCompile Include="SpaceGame\Particle.cpp" />
     <ClCompile Include="SpaceGame\Player.cpp" />
     <ClCompile Include="SpaceGame\SpaceGame.cpp" />
+    <ClCompile Include="SpriteGame\CharacterBase.cpp" />
+    <ClCompile Include="SpriteGame\Damager.cpp" />
     <ClCompile Include="SpriteGame\EnemyController.cpp" />
     <ClCompile Include="SpriteGame\FlyingEnemyController.cpp" />
     <ClCompile Include="SpriteGame\PlayerController.cpp" />
@@ -180,6 +182,8 @@
     <ClInclude Include="SpaceGame\Particle.h" />
     <ClInclude Include="SpaceGame\Player.h" />
     <ClInclude Include="SpaceGame\SpaceGame.h" />
+    <ClInclude Include="SpriteGame\CharacterBase.h" />
+    <ClInclude Include="SpriteGame\Damager.h" />
     <ClInclude Include="SpriteGame\EnemyController.h" />
     <ClInclude Include="SpriteGame\FlyingEnemyController.h" />
     <ClInclude Include="SpriteGame\PlayerController.h" />
@@ -190,7 +194,19 @@
     <None Include="..\Build\Assets\SpaceGame\Data\scene.json" />
     <None Include="..\Build\Assets\SpaceGame\Tilemaps\world.json" />
     <None Include="..\Build\Assets\SpriteGame\Animations\batIdle.json" />
+    <None Include="..\Build\Assets\SpriteGame\Animations\enemy_attack.json" />
+    <None Include="..\Build\Assets\SpriteGame\Animations\enemy_hit.json" />
+    <None Include="..\Build\Assets\SpriteGame\Animations\enemy_idle.json" />
+    <None Include="..\Build\Assets\SpriteGame\Animations\enemy_run.json" />
+    <None Include="..\Build\Assets\SpriteGame\Animations\eye_attack.json" />
+    <None Include="..\Build\Assets\SpriteGame\Animations\eye_hit.json" />
+    <None Include="..\Build\Assets\SpriteGame\Animations\eye_idle.json" />
     <None Include="..\Build\Assets\SpriteGame\Animations\goblin_run.json" />
+    <None Include="..\Build\Assets\SpriteGame\Animations\hero_attack.json" />
+    <None Include="..\Build\Assets\SpriteGame\Animations\hero_death.json" />
+    <None Include="..\Build\Assets\SpriteGame\Animations\hero_idle.json" />
+    <None Include="..\Build\Assets\SpriteGame\Animations\hero_jump.json" />
+    <None Include="..\Build\Assets\SpriteGame\Animations\hero_run.json" />
     <None Include="..\Build\Assets\SpriteGame\Data\level.json" />
     <None Include="..\Build\Assets\SpriteGame\Data\scene.json" />
     <None Include="..\Build\Assets\SpriteGame\Tilemaps\world.json" />

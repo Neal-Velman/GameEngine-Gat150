@@ -1,12 +1,12 @@
 #pragma once
-#include "Framework\Actor.h"
+#include "CharacterBase.h"
 
 namespace nu {
 	class PhysicsComponent;
 	class SpriteAnimatorRendererComponent;
 }
 
-class EnemyController : public nu::Actor {
+class EnemyController : public CharacterBase {
 public:
 	CLASS_PROTOTYPE(EnemyController)
 
@@ -17,6 +17,7 @@ public:
 	void Read(const nu::json::value_t& value) override;
 
 protected:
+	bool m_hasAttacked{ false };
 	nu::PhysicsComponent* m_physicsComponent{ nullptr };
 	nu::SpriteAnimatorRendererComponent* m_rendererComponent{ nullptr };
 };
