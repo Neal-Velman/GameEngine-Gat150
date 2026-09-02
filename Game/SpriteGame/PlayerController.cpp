@@ -31,7 +31,7 @@ void PlayerController::Update(float dt) {
 	} else {
 		m_rendererComponent->Play("idle");
 	}
-	//m_rendererComponent->SetFlipH(dir < 0.0f);
+	m_rendererComponent->SetFlipH(dir < 0.0f);
 
 	m_physicsComponent->SetVelocity(velocity);
 	nu::Engine::Get().GetRenderer().SetCamera(m_physicsComponent->GetPosition());
