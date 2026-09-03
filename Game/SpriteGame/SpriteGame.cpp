@@ -30,10 +30,10 @@ void SpriteGame::Update(float dt) {
         }
         break;
     case GameState::START_GAME:
-        /*m_score = 0;
+        m_score = 0;
         m_lives = 3;
         m_spawnTime = 5.0f;
-        m_stateTimer = 0.5f;*/
+        m_stateTimer = 0.5f;
         m_gameState = GameState::START_LEVEL;
         break;
     case GameState::START_LEVEL:
@@ -57,11 +57,11 @@ void SpriteGame::Update(float dt) {
         }
         break;
     case GameState::GAME_OVER:
-       /* m_stateTimer -= dt;
+        m_stateTimer -= dt;
         if (m_stateTimer <= 0) {
             m_scene->RemoveAllActors();
             m_gameState = GameState::TITLE;
-        }*/
+        }
         break;
     default:
         break;

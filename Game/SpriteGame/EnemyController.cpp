@@ -4,6 +4,7 @@
 #include "Engine.h"
 #include "Core/Factory.h"
 #include "Damager.h"
+#include "SpriteGame.h"
 
 FACTORY_REGISTER(EnemyController)
 
@@ -15,6 +16,7 @@ void EnemyController::Start() {
 	assert(m_physicsComponent);
 	m_rendererComponent = GetComponent<nu::SpriteAnimatorRendererComponent>();
 	assert(m_rendererComponent);
+	m_points = 100;
 }
 
 void EnemyController::Update(float dt) {
@@ -43,12 +45,12 @@ void EnemyController::Update(float dt) {
 
 			if (direction.Length() < 100.0f) {
 				m_state = State::ATTACK;
-				m_rendererComponent->Play("AttacK");
+				m_rendererComponent->Play(nu::ToLower("attack"));
 
 				auto damager = nu::Factory::Instance().Create<Damager>("DamagerPrototype");
 				damager->SetDamage(3.0f);
 				damager->SetPosition(GetTransform().position);
-				damager->SetScale(5.0f);
+				damager->SetScale(1.0f);
 				damager->SetTag("EnemyDamager");
 				m_scene->AddActor(std::move(damager));
 				m_hasAttacked = false;
@@ -59,10 +61,10 @@ void EnemyController::Update(float dt) {
 
 		if (dir != 0.0f) {
 			velocity.x = dir * 100.0f;
-			m_rendererComponent->Play("attack");
+			m_rendererComponent->Play(nu::ToLower("attack"));
 			m_rendererComponent->SetFlipH(dir < 0.0f);
 		} else {
-			m_rendererComponent->Play("idle");
+			m_rendererComponent->Play(nu::ToLower("idle"));
 		}
 	}
 		break;
@@ -74,13 +76,14 @@ void EnemyController::Update(float dt) {
 
 		if (m_rendererComponent->IsAnimationDone()) {
 			m_state = State::MOVE;
-			m_rendererComponent->Play("idle");
+			m_rendererComponent->Play(nu::ToLower("idle"));
 		}
 		break;
 	case CharacterBase::State::HIT:
+		m_physicsComponent->ApplyForce(nu::Vector2{ 0.0f, -10000.0f/*nu::RandomFloat(-250.0f, -500.0f)*/});
 		if (m_rendererComponent->IsAnimationDone()) {
 			m_state = State::MOVE;
-			m_rendererComponent->Play("idle");
+			m_rendererComponent->Play(nu::ToLower("idle"));
 		}
 		break;
 	case CharacterBase::State::DEATH:
@@ -99,13 +102,14 @@ void EnemyController::OnCollision(nu::Actor* other) {
 	if (other->GetTag() == "PlayerDamager") {
 		other->SetDestroyed();
 		m_state = State::HIT;
-		m_rendererComponent->Play("hit");
+		m_rendererComponent->Play(nu::ToLower("hit"));
 		Damager* damager = dynamic_cast<Damager*>(other);
 		if (damager) {
 			m_health -= damager->GetDamage();
 		}
 		if (m_health <= 0) {
 			SetDestroyed();
+			((SpriteGame*)m_scene->GetGame())->AddPoints(m_points);
 		}
 	}
 }

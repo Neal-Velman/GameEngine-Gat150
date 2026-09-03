@@ -5,6 +5,7 @@
 #include "Core/Factory.h"
 #include "Framework/Scene.h"
 #include "Damager.h"
+#include "SpriteGame.h"
 
 FACTORY_REGISTER(PlayerController)
 
@@ -16,6 +17,7 @@ void PlayerController::Start() {
 	assert(m_physicsComponent);
 	m_rendererComponent = GetComponent<nu::SpriteAnimatorRendererComponent>();
 	assert(m_rendererComponent);
+	m_points = -500;
 }
 
 void PlayerController::Update(float dt) {
@@ -61,8 +63,16 @@ void PlayerController::Update(float dt) {
 	}
 		break;
 	case CharacterBase::State::HIT:
+		if (m_rendererComponent->IsAnimationDone()) {
+			m_state = State::MOVE;
+			m_rendererComponent->Play("idle");
+		}
 		break;
 	case CharacterBase::State::DEATH:
+		if (GetDestroyed()) {
+			((SpriteGame*)m_scene->GetGame())->OnPlayerDead();
+			((SpriteGame*)m_scene->GetGame())->AddPoints(m_points);
+		}
 		break;
 	default:
 		break;
@@ -77,12 +87,13 @@ void PlayerController::OnCollision(nu::Actor* other) {
 	if (other->GetTag() == "EnemyDamager") {
 		other->SetDestroyed();
 		m_state = State::HIT;
-		m_rendererComponent->Play("hit");
+		m_rendererComponent->Play("death");
 		Damager* damager = dynamic_cast<Damager*>(other);
 		if (damager) {
 			m_health -= damager->GetDamage();
 		}
 		if (m_health <= 0) {
+			m_state = State::DEATH;
 			SetDestroyed();
 		}
 	}

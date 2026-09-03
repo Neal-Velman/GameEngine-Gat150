@@ -16,6 +16,7 @@ protected:
 	State m_state = State::MOVE;
 	float m_health{ 10.0f };
 	float m_stateTime{ 0.0f };
+	int m_points{ 0 };
 
 
 };

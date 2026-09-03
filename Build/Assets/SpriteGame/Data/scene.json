@@ -71,8 +71,8 @@
           "linear_damping": 1.25,
           "angular_damping": 1.25,
           "shape": "capsule",
-          "size": [ 100, 100 ],
-          "constrain-angle": true,
+          "size": [ 10, 50 ],
+          "constrain_angle": true,
           "gravity_scale": 1
         }
       ]
@@ -83,7 +83,7 @@
       "name": "EnemyPrototype",
       "tag": "Enemy",
       "active": true,
-      "speed": 400,
+      "speed": 200,
       "health": 10,
       "transform": {
         "position": [ 860, 512 ],
@@ -106,6 +106,18 @@
               "texture_frames": "Animations/enemy_idle.json",
               "frames_per_second": 10,
               "loop": true
+            },
+            {
+              "name": "hit",
+              "texture_frames": "Animations/enemy_hit.json",
+              "frames_per_second": 10,
+              "loop": true
+            },
+            {
+              "name": "run",
+              "texture_frames": "Animations/enemy_run.json",
+              "frames_per_second": 10,
+              "loop": true
             }
           ]
         },
@@ -113,8 +125,8 @@
           "type": "Box2DPhysicsComponent",
           "linear_damping": 1.25,
           "angular_damping": 1.25,
-          "size": [ 100, 50 ],
-          "constrain-angle": true,
+          "size": [ 10, 50 ],
+          "constrain_angle": true,
           "gravity_scale": 1
         }
       ]
