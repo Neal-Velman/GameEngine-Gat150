@@ -14,9 +14,19 @@ The default sprite games is a simple platformer combat game. The player is able 
 
 - The player is able to jump around the level, using Box2D's ApplyForce in order to do so. 
 
+- The enemies chase the player in an attempt to take them out. The basic enemy will follow on the ground, while the flying one is able to pass through tilemap terrain to get to the player.
+
 ## Extra Features
 
-- When the player slays an enemy, it will increase their score by a certain amount. When the player dies, their score is reduced by a certain amount, and they return to their original spawn position, deleting all remaining enenmies from the screen. The score and lives remaining are displayed at the top of the screen. Upon losing their last life, the game resets back to the title screen, where the game can be restarted from the beginning.
+- When the player slays an enemy, it will increase their score by a certain amount. When the player dies, their score is reduced by a certain amount, and they return to their original spawn position, deleting all remaining enenmies from the screen. The score and lives remaining are displayed at the top of the screen.
+
+- When the player hits an enemy, it sends the enemy flying into the air. This works on both the flying enemy and basic enemy.
+
+- Upon losing your last life, the game resets back to the title screen, where it can be restarted from the beginning, resetting score and lives.
+
+- A camera will follow the player, keeping them constanly centered onto the screen. The background moves with the camera, as does the score and lives text, allowing for a constant view of their stats.
+
+- The ability to switch between two different games, SpriteGame and SpaceGame, by changing the "auto game - std::make_unique<[GameName]>();" in the Main.cpp file.
 
 ## Building and Running
 
@@ -42,8 +52,10 @@ This engine uses the following libraries for the following purposes:
 
 - **rapidjson**: For serialization, allowing actors to easily derive components to use for their rendering, physics and animations.
 
-## External Assets
+## External Assets / Applications
 
 - **Neumont GameDev Library / Collection**: A collection of assets, including the player, flying enemy, and enemy, all use assets from here. 
 
 - **Tiled**: An editor that allows for the creation of tilemaps that easily convert to JSON, which allow for easy integration of complex maps.
+
+- **Pippi**: An editor that allows for the creation of animations, spritesheets, and tile maps, all of which can be converted to JSON for simple and easy integration into the engine.
