@@ -70,8 +70,13 @@ void SpriteGame::Update(float dt) {
 }
 
 void SpriteGame::Draw(nu::Renderer& renderer) {
-	renderer.EnableCamera(false);
+
     nu::Engine::Get().GetRenderer().DrawBackground(*nu::Resources().Get<nu::Texture>("Textures/bg03.png", nu::Engine::Get().GetRenderer()), 30, 30, 0.0f, 30);
+
+    renderer.EnableCamera();
+    Game::Draw(renderer);
+
+	renderer.EnableCamera(false);
     switch (m_gameState) {
     case GameState::TITLE:
         m_titleText->Create(nu::Engine::Get().GetRenderer(), "Totally Realistic Sprite-Based Combat", nu::Color{ 1.0f, 1.0f, 1.0f });
@@ -94,7 +99,6 @@ void SpriteGame::Draw(nu::Renderer& renderer) {
         break;
     }
     renderer.EnableCamera();
-    Game::Draw(renderer);
 }
 
 void SpriteGame::OnPlayerDead() {

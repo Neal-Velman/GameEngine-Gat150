@@ -28,7 +28,7 @@
       "tag": "Player",
       "active": true,
       "health": 10.0,
-      "speed": 600,
+      "speed": 10000,
       "transform": {
         "position": [ 860, 512 ],
         "rotation": 0,
@@ -196,7 +196,8 @@
       "components": [
         {
           "type": "SpriteRendererComponent",
-          "texture": "Textures/damager.png"
+          "texture": "Textures/damager.png",
+          "active": false
         },
         {
           "type": "Box2DPhysicsComponent",

@@ -1,1 +1,49 @@
-**My Game Engine**
+# 2D - Sprite-Based Physics-Enabled Engine
+
+## Engine Description
+	
+This is a simple engine that is able to render 2D sprites, and applies physics to them. It uses a component-based system to apply seperate components to each actor. Components such as rendering, physics, and animation systems, which allow for easy modification with the serialization from rapidjson. It also comes with a demo of two games, which can easily be switched between by changing the auto game in the Main.cpp between SpriteGame and SpaceGame.
+
+## Game Description
+
+The default sprite games is a simple platformer combat game. The player is able to jump around different platforms and attack enemies with the swing of a sword. The enemies chase the player in an attempt to take them out.
+
+## Core Features
+
+- The player needs to be able to damage enemies and take damage from them. Each actor has a health, so when it dies it is removed from the scene.
+
+- The player is able to jump around the level, using Box2D's ApplyForce in order to do so. 
+
+## Extra Features
+
+- When the player slays an enemy, it will increase their score by a certain amount. When the player dies, their score is reduced by a certain amount, and they return to their original spawn position, deleting all remaining enenmies from the screen. The score and lives remaining are displayed at the top of the screen. Upon losing their last life, the game resets back to the title screen, where the game can be restarted from the beginning.
+
+## Building and Running
+
+- To build the engine and demo game, press "Ctrl + Shift + B" while in Visual Studio. Make sure you're set to x64 Debug mode. Any other will likely cause a crash or a failure to build properly.
+
+## Limitations
+
+- The audio system is only able to support one audio file, adding a second one causes them to both not work.
+
+- Sometimes when killing an enemy, a Box2D assertion error occurs, likely due to how Box2D is trying to handle an update on an actor with a nullptr.
+
+- Because of the removal of some "fluff" from the Box2D library, the only build that works is Debug x64.
+
+- Some enemies within the SpriteGame get stuck on the tilemap platforms due to their movment logic.
+
+## External Libraries
+
+This engine uses the following libraries for the following purposes:
+
+- **SDL3 / SDL3 Image**: For rendering sprites, windows, and handling basic input from the user's keyboard and mouse.
+
+- **Box2D**: For physics systems, collision detection, and some parts of the component system.
+
+- **rapidjson**: For serialization, allowing actors to easily derive components to use for their rendering, physics and animations.
+
+## External Assets
+
+- **Neumont GameDev Library / Collection**: A collection of assets, including the player, flying enemy, and enemy, all use assets from here. 
+
+- **Tiled**: An editor that allows for the creation of tilemaps that easily convert to JSON, which allow for easy integration of complex maps.
